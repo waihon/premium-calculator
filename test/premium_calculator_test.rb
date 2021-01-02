@@ -39,4 +39,16 @@ class PremiumCalculatorTest < Minitest::Test
     expected = 108
     assert_equal expected, calculator.premium_amount
   end
+
+  def test_premium_male_smoker
+    calculator = PremiumCalculator.new(
+      gender: "M",
+      date_of_birth: Date.parse("2003-01-01"),
+      smoking_status: "S",
+      coverage_amount: 100_000,
+      effective_date: Date.parse("2021-01-01")
+    )
+    expected = 153
+    assert_equal expected, calculator.premium_amount
+  end
 end
