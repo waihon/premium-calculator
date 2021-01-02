@@ -7,4 +7,7 @@ class PremiumCalculator
     @coverage_amount = coverage_amount
     @effective_date = effective_date
   end
+
+  def premium_amount 
+  end
 end
