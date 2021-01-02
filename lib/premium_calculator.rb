@@ -1,0 +1,2 @@
+class PremiumCalculator
+end
