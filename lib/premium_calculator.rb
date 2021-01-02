@@ -21,7 +21,12 @@ class PremiumCalculator
         107
       end
     when "M"
-      108
+      case smoking_status
+      when "N"
+        108
+      when "S"
+        153
+      end
     end
   end
 end
