@@ -11,7 +11,12 @@ class PremiumCalculator
     @effective_date = effective_date
   end
 
-  def premium_amount 
-    80
+  def premium_amount
+    case smoking_status
+    when "N"
+      80
+    when "S"
+      107
+    end
   end
 end
