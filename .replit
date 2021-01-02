@@ -1,2 +1,2 @@
 language = "bash"
-run = ""
+run = "ruby test/premium_calculator_test.rb"
