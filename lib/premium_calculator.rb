@@ -9,5 +9,6 @@ class PremiumCalculator
   end
 
   def premium_amount 
+    80
   end
 end
