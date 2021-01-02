@@ -1,4 +1,7 @@
 class PremiumCalculator
+  attr_reader :gender, :date_of_birth, :smoking_status
+  attr_reader :coverage_amount, :effective_date
+
   def initialize(gender:, date_of_birth:, smoking_status:,
                  coverage_amount:, effective_date: Date.today)
     @gender = gender
