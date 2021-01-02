@@ -12,11 +12,16 @@ class PremiumCalculator
   end
 
   def premium_amount
-    case smoking_status
-    when "N"
-      80
-    when "S"
-      107
+    case gender
+    when "F"
+      case smoking_status
+      when "N"
+        80
+      when "S"
+        107
+      end
+    when "M"
+      108
     end
   end
 end
