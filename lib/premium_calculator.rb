@@ -43,3 +43,6 @@ class PremiumCalculator
     100_000.0
   end
 end
+
+class Age
+end
