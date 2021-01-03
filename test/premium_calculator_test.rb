@@ -191,4 +191,10 @@ class AgeTest < Minitest::Test
                   now: Date.parse("2021-02-19"))
     assert_equal 18, age.next
   end
+
+  def test_next_age_on_next_month_after_birthday
+    age = Age.new(date_of_birth: Date.parse("2003-03-18"),
+                  now: Date.parse("2021-04-17"))
+    assert_equal 19, age.next
+  end
 end
