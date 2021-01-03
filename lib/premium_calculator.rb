@@ -66,4 +66,8 @@ class Age
     current_age -= 1 unless (birthday? || birthday_passed?)
     current_age
   end
+
+  def next
+    current + 1
+  end
 end
