@@ -12,7 +12,7 @@ class PremiumCalculator
   end
 
   def premium_amount
-    coverage_amount * premium_rate
+    coverage_amount * premium_rate / rate_divisor
   end
 
   def premium_rate
