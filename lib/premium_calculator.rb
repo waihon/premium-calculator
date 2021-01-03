@@ -12,6 +12,7 @@ class PremiumCalculator
   end
 
   def premium_amount
+    coverage_amount * premium_rate
     case gender
     when "F"
       case smoking_status
