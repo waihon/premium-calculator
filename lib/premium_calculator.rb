@@ -55,4 +55,9 @@ class Age
   def birthday?
     date_of_birth.month == now.month && date_of_birth.day == now.day
   end
+
+  def birthday_passed?
+    (now.month > date_of_birth.month) ||
+    (now.month == date_of_birth.month && now.day > date_of_birth.day)
+  end
 end
