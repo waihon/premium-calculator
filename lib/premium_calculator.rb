@@ -38,4 +38,8 @@ class PremiumCalculator
       end
     end
   end
+
+  def rate_divisor
+    1.0
+  end
 end
