@@ -78,4 +78,9 @@ class PremiumCalculatorTest < Minitest::Test
 end
 
 class AgeTest < Minitest::Test
+  def test_birthday_on_birthday
+    age = Age.new(date_of_birth: Date.parse("2003-01-01"),
+                 now: Date.parse("2021-01-01"))
+    assert_equal true, age.birthday?
+  end
 end
