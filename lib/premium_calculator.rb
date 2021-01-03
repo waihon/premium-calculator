@@ -20,7 +20,12 @@ class PremiumCalculator
     when "F"
       case smoking_status
       when "N"
-        0.0008 
+        case date_of_birth.year
+        when 2003
+          0.0008 
+        when 1961
+          0.00934
+        end
       when "S"
         0.00107 
       end
