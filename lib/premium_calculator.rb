@@ -22,24 +22,24 @@ class PremiumCalculator
       when "N"
         case date_of_birth.year
         when 2003
-          0.0008 
+          80
         when 1961
-          0.00934
+          934
         end
       when "S"
-        0.00107 
+        107
       end
     when "M"
       case smoking_status
       when "N"
-        0.00108 
+        108
       when "S"
-        0.00153 
+        153
       end
     end
   end
 
   def rate_divisor
-    1.0
+    100_000.0
   end
 end
