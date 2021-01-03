@@ -76,3 +76,6 @@ class PremiumCalculatorTest < Minitest::Test
     assert_equal expected, calculator.premium_amount
   end
 end
+
+class AgeTest < Minitest::Test
+end
