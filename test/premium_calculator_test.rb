@@ -143,4 +143,10 @@ class AgeTest < Minitest::Test
                  now: Date.parse("2021-03-18"))
     assert_equal 18, age.current
   end
+
+  def test_current_age_on_one_day_before_birthday
+    age = Age.new(date_of_birth: Date.parse("2003-03-18"),
+                 now: Date.parse("2021-03-17"))
+    assert_equal 17, age.current
+  end
 end
