@@ -119,4 +119,10 @@ class AgeTest < Minitest::Test
                  now: Date.parse("2021-01-17"))
     assert_equal false, age.birthday_passed?
   end
+
+  def test_birthday_passed_on_one_day_after_birthday
+    age = Age.new(date_of_birth: Date.parse("2003-01-18"),
+                 now: Date.parse("2021-01-19"))
+    assert_equal true, age.birthday_passed?
+  end
 end
