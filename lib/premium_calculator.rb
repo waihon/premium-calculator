@@ -29,4 +29,23 @@ class PremiumCalculator
       end
     end
   end
+
+  def premium_rate
+    case gender
+    when "F"
+      case smoking_status
+      when "N"
+        0.0008 
+      when "S"
+        0.00107 
+      end
+    when "M"
+      case smoking_status
+      when "N"
+        0.00108 
+      when "S"
+        0.00153 
+      end
+    end
+  end
 end
