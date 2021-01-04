@@ -16,14 +16,15 @@ class PremiumCalculator
   end
 
   def premium_rate
+    age = Age.new(date_of_birth: date_of_birth, now: effective_date)
     case gender
     when "F"
       case smoking_status
       when "N"
-        case date_of_birth.year
-        when 2003
+        case age.current
+        when 18
           80
-        when 1961
+        when 60
           934
         end
       when "S"
