@@ -20,25 +20,25 @@ class PremiumCalculator
   def premium_rate
     age = Age.new(date_of_birth: date_of_birth, now: effective_date)
     rates = YAML.load(File.read("config/premium_rates.yaml"))
-    rates = {
-      "F" => {
-        "N" => {
-          18 => 80,
-          60 => 934
-        },
-        "S" => {
-          18 => 107
-        }
-      },
-      "M" => {
-        "N" => {
-          18 => 108
-        },
-        "S" => {
-          18 => 153
-        }
-      }
-    }
+    # rates = {
+    #   "F" => {
+    #     "N" => {
+    #       18 => 80,
+    #       60 => 934
+    #     },
+    #     "S" => {
+    #       18 => 107
+    #     }
+    #   },
+    #   "M" => {
+    #     "N" => {
+    #       18 => 108
+    #     },
+    #     "S" => {
+    #       18 => 153
+    #     }
+    #   }
+    # }
     rates[gender][smoking_status][age.current]
   end
 
