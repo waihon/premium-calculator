@@ -1,3 +1,5 @@
+require 'yaml'
+
 class PremiumCalculator
   attr_reader :gender, :date_of_birth, :smoking_status
   attr_reader :coverage_amount, :effective_date
@@ -17,7 +19,8 @@ class PremiumCalculator
 
   def premium_rate
     age = Age.new(date_of_birth: date_of_birth, now: effective_date)
-    rate = {
+    rates = YAML.load(File.read("config/premium_rates.yaml"))
+    rates = {
       "F" => {
         "N" => {
           18 => 80,
@@ -36,7 +39,7 @@ class PremiumCalculator
         }
       }
     }
-    rate[gender][smoking_status][age.current]
+    rates[gender][smoking_status][age.current]
   end
 
   def rate_divisor
