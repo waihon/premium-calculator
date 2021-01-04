@@ -37,28 +37,6 @@ class PremiumCalculator
       }
     }
     rate[gender][smoking_status][age.current]
-
-    # case gender
-    # when "F"
-    #   case smoking_status
-    #   when "N"
-    #     case age.current
-    #     when 18
-    #       80
-    #     when 60
-    #       934
-    #     end
-    #   when "S"
-    #     107
-    #   end
-    # when "M"
-    #   case smoking_status
-    #   when "N"
-    #     108
-    #   when "S"
-    #     153
-    #   end
-    # end
   end
 
   def rate_divisor
