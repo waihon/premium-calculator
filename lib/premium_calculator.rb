@@ -16,6 +16,10 @@ class PremiumCalculator
     @quote = quote
   end
 
+  def initialize(quote:)
+    @quote = quote
+  end
+
   def premium_amount
     if quote
       quote.coverage_amount * premium_rate / rate_divisor
