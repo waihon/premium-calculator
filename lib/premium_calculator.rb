@@ -1,8 +1,6 @@
 require 'yaml'
 
 class PremiumCalculator
-  attr_reader :gender, :date_of_birth, :smoking_status
-  attr_reader :coverage_amount, :effective_date
   attr_reader :quote
 
   def initialize(quote:)
@@ -10,23 +8,13 @@ class PremiumCalculator
   end
 
   def premium_amount
-    if quote
-      quote.coverage_amount * premium_rate / rate_divisor
-    else
-      coverage_amount * premium_rate / rate_divisor
-    end
+    quote.coverage_amount * premium_rate / rate_divisor
   end
 
   def premium_rate
-    if quote
-      age = Age.new(date_of_birth: quote.date_of_birth, now: quote.effective_date)
-      rates = YAML.load(File.read("config/premium_rates.yaml"))
-      rates[quote.gender][quote.smoking_status][age.current]
-    else
-      age = Age.new(date_of_birth: date_of_birth, now: effective_date)
-      rates = YAML.load(File.read("config/premium_rates.yaml"))
-      rates[gender][smoking_status][age.current]
-    end
+    age = Age.new(date_of_birth: quote.date_of_birth, now: quote.effective_date)
+    rates = YAML.load(File.read("config/premium_rates.yaml"))
+    rates[quote.gender][quote.smoking_status][age.current]
   end
 
   def rate_divisor
