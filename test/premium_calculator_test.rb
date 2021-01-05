@@ -17,7 +17,8 @@ class PremiumCalculatorTest < Minitest::Test
       date_of_birth: Date.parse("2003-01-01"),
       smoking_status: "N",
       coverage_amount: 100_000,
-      effective_date: Date.parse("2021-01-01")
+      effective_date: Date.parse("2021-01-01"),
+      quote: quote
     )
     expected = 80
     assert_equal expected, calculator.premium_amount
