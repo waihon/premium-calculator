@@ -17,13 +17,23 @@ class PremiumCalculator
   end
 
   def premium_amount
-    coverage_amount * premium_rate / rate_divisor
+    if quote
+      quote.coverage_amount * premium_rate / rate_divisor
+    else
+      coverage_amount * premium_rate / rate_divisor
+    end
   end
 
   def premium_rate
-    age = Age.new(date_of_birth: date_of_birth, now: effective_date)
-    rates = YAML.load(File.read("config/premium_rates.yaml"))
-    rates[gender][smoking_status][age.current]
+    if quote
+      age = Age.new(date_of_birth: quote.date_of_birth, now: quote.effective_date)
+      rates = YAML.load(File.read("config/premium_rates.yaml"))
+      rates[quote.gender][quote.smoking_status][age.current]
+    else
+      age = Age.new(date_of_birth: date_of_birth, now: effective_date)
+      rates = YAML.load(File.read("config/premium_rates.yaml"))
+      rates[gender][smoking_status][age.current]
+    end
   end
 
   def rate_divisor
