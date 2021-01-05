@@ -7,7 +7,7 @@ class PremiumCalculator
 
   def initialize(gender:, date_of_birth:, smoking_status:,
                  coverage_amount:, effective_date: Date.today,
-                 quote: nil)
+                 quote:)
     @gender = gender
     @date_of_birth = date_of_birth
     @smoking_status = smoking_status
