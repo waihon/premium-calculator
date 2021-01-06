@@ -15,12 +15,6 @@ class PremiumCalculator
     quote.coverage_amount * premium_rate.rate / rate_divisor
   end
 
-  def premium_rate
-    age = Age.new(date_of_birth: quote.date_of_birth, now: quote.effective_date)
-    rates = YAML.load(File.read("config/premium_rates.yaml"))
-    rates[quote.gender][quote.smoking_status][age.current]
-  end
-
   def rate_divisor
     100_000.0
   end
