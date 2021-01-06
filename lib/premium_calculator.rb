@@ -9,11 +9,10 @@ class PremiumCalculator
 
   def premium_amount
     age = Age.new(date_of_birth: quote.date_of_birth, now: quote.effective_date)
-    rate = PremiumRate.new(gender: quote.gender,
-                           smoking_status: quote.smoking_status,
-                           age: age.current)
-    quote.coverage_amount * rate.rate / rate_divisor
-    quote.coverage_amount * premium_rate / rate_divisor
+    premium_rate = PremiumRate.new(gender: quote.gender,
+                                   smoking_status: quote.smoking_status,
+                                   age: age.current)
+    quote.coverage_amount * premium_rate.rate / rate_divisor
   end
 
   def premium_rate
