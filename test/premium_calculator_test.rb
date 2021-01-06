@@ -215,4 +215,14 @@ class PremiumRateTest < Minitest::Test
     expected = 80
     assert_equal expected, premium_rate.rate
   end
+
+  def test_rate_female_smoker
+    premium_rate = PremiumRate.new(
+      gender: "F",
+      smoking_status: "S",
+      age: 18
+    )
+    expected = 107
+    assert_equal expected, premium_rate.rate
+  end
 end
