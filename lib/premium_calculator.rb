@@ -63,3 +63,18 @@ class Quote
     @effective_date = effective_date
   end
 end
+
+class PremiumRate
+  attr_reader :gender, :smoking_status, :age
+
+  def initialize(gender:, smoking_status:, age:)
+    @gender = gender
+    @smoking_status = smoking_status
+    @age = age
+  end
+
+  def rate
+    rates = YAML.load(File.read("config/premium_rates.yaml"))
+    rates[gender][smoking_status][age]
+  end
+end
