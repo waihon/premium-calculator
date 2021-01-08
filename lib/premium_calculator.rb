@@ -8,6 +8,7 @@ class PremiumCalculator
   end
 
   def premium_amount
+    age = AgeCalculator.new(date_of_birth: quote.date_of_birth, now: quote.effective_date)
     age = Age.new(date_of_birth: quote.date_of_birth, now: quote.effective_date)
     premium_rate = PremiumRate.new(gender: quote.gender,
                                    smoking_status: quote.smoking_status,
