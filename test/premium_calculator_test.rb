@@ -14,7 +14,7 @@ class PremiumCalculatorTest < Minitest::Test
     )
     calculator = PremiumCalculator.new(quote: quote)
     expected = 80
-    assert_equal expected, calculator.premium_amount
+    assert_equal(expected, calculator.premium_amount)
   end
 
   def test_premium_female_smoker
@@ -27,7 +27,7 @@ class PremiumCalculatorTest < Minitest::Test
     )
     calculator = PremiumCalculator.new(quote: quote)
     expected = 107
-    assert_equal expected, calculator.premium_amount
+    assert_equal(expected, calculator.premium_amount)
   end
 
   def test_premium_male_non_smoker
@@ -40,7 +40,7 @@ class PremiumCalculatorTest < Minitest::Test
     )
     calculator = PremiumCalculator.new(quote: quote)
     expected = 108
-    assert_equal expected, calculator.premium_amount
+    assert_equal(expected, calculator.premium_amount)
   end
 
   def test_premium_male_smoker
@@ -53,7 +53,7 @@ class PremiumCalculatorTest < Minitest::Test
     )
     calculator = PremiumCalculator.new(quote: quote)
     expected = 153
-    assert_equal expected, calculator.premium_amount
+    assert_equal(expected, calculator.premium_amount)
   end
 
   def test_premium_higher_coverage_amount
@@ -66,7 +66,7 @@ class PremiumCalculatorTest < Minitest::Test
     )
     calculator = PremiumCalculator.new(quote: quote)
     expected = 120
-    assert_equal expected, calculator.premium_amount
+    assert_equal(expected, calculator.premium_amount)
   end
 
   def test_premium_earlier_date_of_birth
@@ -79,7 +79,7 @@ class PremiumCalculatorTest < Minitest::Test
     )
     calculator = PremiumCalculator.new(quote: quote)
     expected = 934 
-    assert_equal expected, calculator.premium_amount
+    assert_equal(expected, calculator.premium_amount)
   end
 end
 
@@ -93,115 +93,115 @@ class AgeCalculatorTest < Minitest::Test
   def test_birthday_on_one_day_before_birthday
     age = AgeCalculator.new(date_of_birth: Date.parse("2003-01-01"),
                             now: Date.parse("2020-12-31"))
-    assert_equal false, age.birthday?
+    assert_equal(false, age.birthday?)
   end
 
   def test_birthday_on_one_day_after_birthday
     age = AgeCalculator.new(date_of_birth: Date.parse("2003-01-01"),
                            now: Date.parse("2021-01-02"))
-    assert_equal false, age.birthday?
+    assert_equal(false, age.birthday?)
   end
 
   def test_birthday_on_same_day_one_month_before
     age = AgeCalculator.new(date_of_birth: Date.parse("2003-01-01"),
                             now: Date.parse("2020-12-01"))
-    assert_equal false, age.birthday?
+    assert_equal(false, age.birthday?)
   end
 
   def test_birthday_on_same_day_one_month_after
     age = AgeCalculator.new(date_of_birth: Date.parse("2003-01-01"),
                             now: Date.parse("2021-02-01"))
-    assert_equal false, age.birthday?
+    assert_equal(false, age.birthday?)
   end
 
   def test_birthday_passed_on_birthday
     age = AgeCalculator.new(date_of_birth: Date.parse("2003-01-01"),
                             now: Date.parse("2021-01-01"))
-    assert_equal false, age.birthday_passed?
+    assert_equal(false, age.birthday_passed?)
   end
 
   def test_birthday_passed_on_one_day_before_birthday
     age = AgeCalculator.new(date_of_birth: Date.parse("2003-01-18"),
                             now: Date.parse("2021-01-17"))
-    assert_equal false, age.birthday_passed?
+    assert_equal(false, age.birthday_passed?)
   end
 
   def test_birthday_passed_on_one_day_after_birthday
     age = AgeCalculator.new(date_of_birth: Date.parse("2003-01-18"),
                             now: Date.parse("2021-01-19"))
-    assert_equal true, age.birthday_passed?
+    assert_equal(true, age.birthday_passed?)
   end
 
   def test_birthday_passed_on_previous_month_before_birthday
     age = AgeCalculator.new(date_of_birth: Date.parse("2003-03-18"),
                             now: Date.parse("2021-02-19"))
-    assert_equal false, age.birthday_passed?
+    assert_equal(false, age.birthday_passed?)
   end
 
   def test_birthday_passed_on_next_month_after_birthday
     age = AgeCalculator.new(date_of_birth: Date.parse("2003-03-18"),
                             now: Date.parse("2021-04-17"))
-    assert_equal true, age.birthday_passed?
+    assert_equal(true, age.birthday_passed?)
   end
 
   def test_current_age_on_birthday
     age = AgeCalculator.new(date_of_birth: Date.parse("2003-03-18"),
                             now: Date.parse("2021-03-18"))
-    assert_equal 18, age.current
+    assert_equal(18, age.current)
   end
 
   def test_current_age_on_one_day_before_birthday
     age = AgeCalculator.new(date_of_birth: Date.parse("2003-03-18"),
                             now: Date.parse("2021-03-17"))
-    assert_equal 17, age.current
+    assert_equal(17, age.current)
   end
 
   def test_current_age_on_one_day_after_birthday
     age = AgeCalculator.new(date_of_birth: Date.parse("2003-03-18"),
                             now: Date.parse("2021-03-19"))
-    assert_equal 18, age.current
+    assert_equal(18, age.current)
   end
 
   def test_current_age_on_previous_month_before_birthday
     age = AgeCalculator.new(date_of_birth: Date.parse("2003-03-18"),
                             now: Date.parse("2021-02-19"))
-    assert_equal 17, age.current
+    assert_equal(17, age.current)
   end
 
   def test_current_age_on_next_month_after_birthday
     age = AgeCalculator.new(date_of_birth: Date.parse("2003-03-18"),
                             now: Date.parse("2021-04-17"))
-    assert_equal 18, age.current
+    assert_equal(18, age.current)
   end
 
   def test_next_age_on_birthday
     age = AgeCalculator.new(date_of_birth: Date.parse("2003-03-18"),
                             now: Date.parse("2021-03-18"))
-    assert_equal 19, age.next
+    assert_equal(19, age.next)
   end
 
   def test_next_age_on_one_day_before_birthday
     age = AgeCalculator.new(date_of_birth: Date.parse("2003-03-18"),
                             now: Date.parse("2021-03-17"))
-    assert_equal 18, age.next
+    assert_equal(18, age.next)
   end
 
   def test_next_age_on_one_day_after_birthday
     age = AgeCalculator.new(date_of_birth: Date.parse("2003-03-18"),
                             now: Date.parse("2021-03-19"))
-    assert_equal 19, age.next
+    assert_equal(19, age.next)
   end
 
   def test_next_age_on_previous_month_before_birthday
     age = AgeCalculator.new(date_of_birth: Date.parse("2003-03-18"),
                             now: Date.parse("2021-02-19"))
-    assert_equal 18, age.next
+    assert_equal(18, age.next)
   end
 
   def test_next_age_on_next_month_after_birthday
     age = AgeCalculator.new(date_of_birth: Date.parse("2003-03-18"),
                             now: Date.parse("2021-04-17"))
-    assert_equal 19, age.next
+    assert_equal(19, age.next)
   end
 end
 
@@ -213,7 +213,7 @@ class PremiumRateTest < Minitest::Test
       age: 18
     )
     expected = 80
-    assert_equal expected, premium_rate.rate
+    assert_equal(expected, premium_rate.rate)
   end
 
   def test_rate_female_smoker
@@ -223,7 +223,7 @@ class PremiumRateTest < Minitest::Test
       age: 18
     )
     expected = 107
-    assert_equal expected, premium_rate.rate
+    assert_equal(expected, premium_rate.rate)
   end
 
   def test_rate_male_non_smoker
@@ -233,7 +233,7 @@ class PremiumRateTest < Minitest::Test
       age: 18
     )
     expected = 108
-    assert_equal expected, premium_rate.rate
+    assert_equal(expected, premium_rate.rate)
   end
 
   def test_rate_male_smoker
@@ -243,7 +243,7 @@ class PremiumRateTest < Minitest::Test
       age: 18
     )
     expected = 153
-    assert_equal expected, premium_rate.rate
+    assert_equal(expected, premium_rate.rate)
   end
 
   def test_rate_female_non_smoker_higher_age
@@ -253,7 +253,7 @@ class PremiumRateTest < Minitest::Test
       age: 60
     )
     expected = 934 
-    assert_equal expected, premium_rate.rate
+    assert_equal(expected, premium_rate.rate)
   end
 
   def test_rate_female_non_smoker_unfound_age
