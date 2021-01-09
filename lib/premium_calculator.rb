@@ -73,6 +73,21 @@ class PremiumRate
 
   def rate
     rates = YAML.load(File.read("config/premium_rates.yaml"))
+
+    raise PremiumRateNotFoundError.new("Premium Rate Not Found", :gender) unless rates[gender]
+    raise PremiumRateNotFoundError.new("Premium Rate Not Found", :smoking_status) unless rates[gender][smoking_status]
+    raise PremiumRateNotFoundError.new("Premium Rate Not Found", :age) unless rates[gender][smoking_status][age]
+
     rates[gender][smoking_status][age]
+  end
+end
+
+class PremiumRateNotFoundError < StandardError
+  attr_reader :key
+
+  def initialize(message, key)
+    super(message)
+
+    @key = key
   end
 end
