@@ -81,6 +81,18 @@ class PremiumCalculatorTest < Minitest::Test
     expected = 934 
     assert_equal(expected, calculator.premium_amount)
   end
+
+  def test_premium_female_non_smoker_unfound_age
+    quote = Quote.new(
+      gender: "F",
+      date_of_birth: Date.parse("2004-01-01"),
+      smoking_status: "N",
+      coverage_amount: 100_000,
+      effective_date: Date.parse("2021-01-01")
+    )
+    calculator = PremiumCalculator.new(quote: quote)
+    assert_nil(calculator.premium_amount)
+  end
 end
 
 class AgeCalculatorTest < Minitest::Test
