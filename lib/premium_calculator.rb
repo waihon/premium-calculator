@@ -12,7 +12,11 @@ class PremiumCalculator
     premium_rate = PremiumRate.new(gender: quote.gender,
                                    smoking_status: quote.smoking_status,
                                    age: age.current)
-    quote.coverage_amount * premium_rate.rate / rate_divisor
+    begin
+      quote.coverage_amount * premium_rate.rate / rate_divisor
+    rescue PremiumRateNotFoundError => e
+      puts "#{e.message} for #{e.key}"
+    end
   end
 
   def rate_divisor
