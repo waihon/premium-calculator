@@ -93,6 +93,18 @@ class PremiumCalculatorTest < Minitest::Test
     calculator = PremiumCalculator.new(quote: quote)
     assert_nil(calculator.premium_amount)
   end
+
+  def test_premium_female_unknown_smoking_status
+    quote = Quote.new(
+      gender: "F",
+      date_of_birth: Date.parse("2003-01-01"),
+      smoking_status: "X",
+      coverage_amount: 100_000,
+      effective_date: Date.parse("2021-01-01")
+    )
+    calculator = PremiumCalculator.new(quote: quote)
+    assert_nil(calculator.premium_amount)
+  end
 end
 
 class AgeCalculatorTest < Minitest::Test
