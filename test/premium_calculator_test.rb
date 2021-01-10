@@ -322,3 +322,10 @@ class PremiumRateTest < Minitest::Test
     assert_equal(:gender, error.key)
   end
 end
+
+class PremiumRatesTest < Minitest::Test
+  def test_premium_rates_valid_plan
+    rates = PremiumRates.new(plan_code: "T15").rates
+    refute_nil(rates)
+  end
+end

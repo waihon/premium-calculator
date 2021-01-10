@@ -99,3 +99,15 @@ class PremiumRateNotFoundError < StandardError
     @key = key
   end
 end
+
+class PremiumRates
+  attr_reader :plan_code, :rates
+
+  def initialize(plan_code:)
+    @plan_code = plan_code
+  end
+
+  def rates
+    @rates ||= YAML.load(File.read("config/#{plan_code}/premium_rates.yaml"))
+  end
+end
