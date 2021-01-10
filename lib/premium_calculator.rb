@@ -81,7 +81,6 @@ class PremiumRate
 
   def rate
     rates = YAML.load(File.read("config/#{plan_code}/premium_rates.yaml"))
-    rates = YAML.load(File.read("config/premium_rates.yaml"))
 
     raise PremiumRateNotFoundError.new("Premium Rate Not Found", :gender) unless rates[gender]
     raise PremiumRateNotFoundError.new("Premium Rate Not Found", :smoking_status) unless rates[gender][smoking_status]
