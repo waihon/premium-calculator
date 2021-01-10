@@ -108,6 +108,8 @@ class PremiumRates
   end
 
   def rates
-    @rates ||= YAML.load(File.read("config/#{plan_code}/premium_rates.yaml"))
+    filename = "config/#{plan_code}/premium_rates.yaml"
+    return nil unless File.exists?(filename)
+    @rates ||= YAML.load(filename)
   end
 end

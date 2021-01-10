@@ -328,4 +328,9 @@ class PremiumRatesTest < Minitest::Test
     rates = PremiumRates.new(plan_code: "T15").rates
     refute_nil(rates)
   end
+
+  def test_premium_rates_invalid_plan
+    rates = PremiumRates.new(plan_code: "XXX").rates
+    assert_nil(rates)
+  end
 end
