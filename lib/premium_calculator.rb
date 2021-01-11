@@ -132,4 +132,8 @@ class ModalFactor
   def quarterly
     0.2565
   end
+
+  def monthly
+    0.0865
+  end
 end
