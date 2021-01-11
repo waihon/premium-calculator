@@ -340,4 +340,9 @@ class ModalFactorTest < Minitest::Test
     modal_factor = ModalFactor.new(plan_code: "T15")
     assert_equal(1.0000, modal_factor.yearly)
   end
+
+  def test_modal_factor_t15_half_yearly
+    modal_factor = ModalFactor.new(plan_code: "T15")
+    assert_equal(0.5065, modal_factor.half_yearly)
+  end
 end
