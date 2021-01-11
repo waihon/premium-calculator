@@ -128,4 +128,8 @@ class ModalFactor
   def half_yearly
     0.5065
   end
+
+  def quarterly
+    0.2565
+  end
 end
