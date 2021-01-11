@@ -334,3 +334,10 @@ class PremiumRatesTest < Minitest::Test
     assert_nil(rates)
   end
 end
+
+class ModalFactorTest < Minitest::Test
+  def test_modal_factor_t15_yearly
+    modal_factor = ModalFactor.new(plan_code: "T15")
+    assert_equal(1.0000, modal_factor.yearly)
+  end
+end

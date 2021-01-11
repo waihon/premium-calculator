@@ -113,3 +113,15 @@ class PremiumRates
     @rates ||= YAML.load(filename)
   end
 end
+
+class ModalFactor
+  attr_reader :plan_code
+
+  def initialize(plan_code:)
+    @plan_code = plan_code
+  end
+
+  def yearly
+    1.0000
+  end
+end
