@@ -121,6 +121,12 @@ class ModalFactor
     @plan_code = plan_code
   end
 
+  def modal_factor
+    filename = "config/modal_factor.yaml"
+    return nil unless File.exists?(filename)
+    @modal_factor ||= YAML.load(File.read(filename))
+  end
+
   def yearly
     1.0000
   end
