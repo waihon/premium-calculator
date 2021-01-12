@@ -132,7 +132,7 @@ class ModalFactor
   end
 
   def half_yearly
-    0.5065
+    modal_factor[plan_code]["HY"] 
   end
 
   def quarterly
