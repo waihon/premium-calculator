@@ -140,6 +140,6 @@ class ModalFactor
   end
 
   def monthly
-    0.0865
+    modal_factor[plan_code]["M"] 
   end
 end
