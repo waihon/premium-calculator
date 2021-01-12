@@ -128,8 +128,7 @@ class ModalFactor
   end
 
   def yearly
-     modal_factor[plan_code]["Y"]
-     1.0000
+    modal_factor[plan_code]["Y"]
   end
 
   def half_yearly
