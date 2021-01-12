@@ -136,7 +136,7 @@ class ModalFactor
   end
 
   def quarterly
-    0.2565
+    modal_factor[plan_code]["Q"] 
   end
 
   def monthly
