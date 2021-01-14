@@ -11,7 +11,8 @@ class PremiumCalculator
     age = AgeCalculator.new(date_of_birth: quote.date_of_birth, now: quote.effective_date)
     premium_rate = PremiumRate.new(gender: quote.gender,
                                    smoking_status: quote.smoking_status,
-                                   age: age.current)
+                                   age: age.current,
+                                   plan_code: quote.plan_code)
     begin
       quote.coverage_amount * premium_rate.rate / rate_divisor
     rescue PremiumRateNotFoundError => e
