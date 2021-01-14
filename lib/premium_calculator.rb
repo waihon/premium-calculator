@@ -73,7 +73,7 @@ end
 class PremiumRate
   attr_reader :gender, :smoking_status, :age, :plan_code
 
-  def initialize(gender:, smoking_status:, age:, plan_code: "T15")
+  def initialize(gender:, smoking_status:, age:, plan_code:)
     @gender = gender
     @smoking_status = smoking_status
     @age = age
