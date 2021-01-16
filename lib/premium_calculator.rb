@@ -56,17 +56,18 @@ end
 class Quote
   attr_reader :gender, :date_of_birth, :smoking_status
   attr_reader :coverage_amount, :effective_date
-  attr_reader :plan_code
+  attr_reader :plan_code, :coverage_terms
 
   def initialize(gender:, date_of_birth:, smoking_status:,
                  coverage_amount:, effective_date: Date.today,
-                 plan_code:)
+                 plan_code:, coverage_terms: 15)
     @gender = gender
     @date_of_birth = date_of_birth
     @smoking_status = smoking_status
     @coverage_amount = coverage_amount
     @effective_date = effective_date
     @plan_code = plan_code
+    @coverage_terms = coverage_terms
   end
 end
 
