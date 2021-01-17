@@ -73,12 +73,15 @@ end
 
 class PremiumRate
   attr_reader :gender, :smoking_status, :age, :plan_code
+  attr_reader :coverage_terms
 
-  def initialize(gender:, smoking_status:, age:, plan_code:)
+  def initialize(gender:, smoking_status:, age:, plan_code:,
+    coverage_terms: :FIX_ME)
     @gender = gender
     @smoking_status = smoking_status
     @age = age
     @plan_code = plan_code
+    @coverage_terms = coverage_terms
   end
 
   def rate
