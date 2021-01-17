@@ -88,11 +88,20 @@ class PremiumRate
     premium_rates = PremiumRates.new(plan_code: plan_code)
     rates = premium_rates.rates
 
-    raise PremiumRateNotFoundError.new("Premium Rate Not Found", :gender) unless rates[gender]
-    raise PremiumRateNotFoundError.new("Premium Rate Not Found", :smoking_status) unless rates[gender][smoking_status]
-    raise PremiumRateNotFoundError.new("Premium Rate Not Found", :age) unless rates[gender][smoking_status][age]
+    if coverage_terms != :FIX_ME
+      raise PremiumRateNotFoundError.new("Premium Rate Not Found", :coverage_terms) unless rates[coverage_terms]
+      raise PremiumRateNotFoundError.new("Premium Rate Not Found", :gender) unless rates[coverage_terms][gender]
+      raise PremiumRateNotFoundError.new("Premium Rate Not Found", :smoking_status) unless rates[coverage_terms][gender][smoking_status]
+      raise PremiumRateNotFoundError.new("Premium Rate Not Found", :age) unless rates[coverage_terms][gender][smoking_status][age]
 
-    rates[gender][smoking_status][age]
+      rates[coverage_terms][gender][smoking_status][age]
+    else
+      raise PremiumRateNotFoundError.new("Premium Rate Not Found", :gender) unless rates[gender]
+      raise PremiumRateNotFoundError.new("Premium Rate Not Found", :smoking_status) unless rates[gender][smoking_status]
+      raise PremiumRateNotFoundError.new("Premium Rate Not Found", :age) unless rates[gender][smoking_status][age]
+
+      rates[gender][smoking_status][age]
+    end
   end
 end
 
