@@ -338,10 +338,22 @@ class PremiumRateTest < Minitest::Test
     error = assert_raises(PremiumRateNotFoundError) { premium_rate.rate }
     assert_equal(:gender, error.key)
   end
+
+  def test_rate_unfound_coverage_terms
+    premium_rate = PremiumRate.new(
+      gender: "F",
+      smoking_status: "N",
+      age: 18,
+      plan_code: "T15",
+      coverage_terms: 16
+    )
+    error = assert_raises(PremiumRateNotFoundError) { premium_rate.rate }
+    assert_equal(:coverage_terms, error.key)
+  end
 end
 
 class PremiumRatesTest < Minitest::Test
-  def test_premium_rates_valid_plan
+  def test_premXum_rates_valid_plan
     rates = PremiumRates.new(plan_code: "T15").rates
     refute_nil(rates)
   end
