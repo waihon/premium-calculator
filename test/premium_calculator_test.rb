@@ -256,7 +256,8 @@ class PremiumRateTest < Minitest::Test
       gender: "F",
       smoking_status: "N",
       age: 18,
-      plan_code: "T15"
+      plan_code: "T15",
+      coverage_terms: 15
     )
     expected = 80
     assert_equal(expected, premium_rate.rate)
