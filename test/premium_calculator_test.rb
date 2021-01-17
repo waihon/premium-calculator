@@ -268,7 +268,8 @@ class PremiumRateTest < Minitest::Test
       gender: "F",
       smoking_status: "S",
       age: 18,
-      plan_code: "T15"
+      plan_code: "T15",
+      coverage_terms: 15
     )
     expected = 107
     assert_equal(expected, premium_rate.rate)
@@ -279,7 +280,8 @@ class PremiumRateTest < Minitest::Test
       gender: "M",
       smoking_status: "N",
       age: 18,
-      plan_code: "T15"
+      plan_code: "T15",
+      coverage_terms: 15
     )
     expected = 108
     assert_equal(expected, premium_rate.rate)
@@ -290,7 +292,8 @@ class PremiumRateTest < Minitest::Test
       gender: "M",
       smoking_status: "S",
       age: 18,
-      plan_code: "T15"
+      plan_code: "T15",
+      coverage_terms: 15
     )
     expected = 153
     assert_equal(expected, premium_rate.rate)
@@ -301,7 +304,8 @@ class PremiumRateTest < Minitest::Test
       gender: "F",
       smoking_status: "N",
       age: 60,
-      plan_code: "T15"
+      plan_code: "T15",
+      coverage_terms: 15
     )
     expected = 934 
     assert_equal(expected, premium_rate.rate)
@@ -312,7 +316,8 @@ class PremiumRateTest < Minitest::Test
       gender: "F",
       smoking_status: "N",
       age: 61,
-      plan_code: "T15"
+      plan_code: "T15",
+      coverage_terms: 15
     )
     error = assert_raises(PremiumRateNotFoundError) { premium_rate.rate }
     assert_equal(:age, error.key)
@@ -323,7 +328,8 @@ class PremiumRateTest < Minitest::Test
       gender: "F",
       smoking_status: "X",
       age: 18,
-      plan_code: "T15"
+      plan_code: "T15",
+      coverage_terms: 15
     )
     error = assert_raises(PremiumRateNotFoundError) { premium_rate.rate }
     assert_equal(:smoking_status, error.key)
@@ -334,7 +340,8 @@ class PremiumRateTest < Minitest::Test
       gender: "X",
       smoking_status: "N",
       age: 18,
-      plan_code: "T15"
+      plan_code: "T15",
+      coverage_terms: 15
     )
     error = assert_raises(PremiumRateNotFoundError) { premium_rate.rate }
     assert_equal(:gender, error.key)
