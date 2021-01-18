@@ -60,7 +60,7 @@ class Quote
 
   def initialize(gender:, date_of_birth:, smoking_status:,
                  coverage_amount:, effective_date: Date.today,
-                 plan_code:, coverage_terms: 15)
+                 plan_code:, coverage_terms:)
     @gender = gender
     @date_of_birth = date_of_birth
     @smoking_status = smoking_status
