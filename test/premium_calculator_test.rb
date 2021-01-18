@@ -26,7 +26,8 @@ class PremiumCalculatorTest < Minitest::Test
       smoking_status: "S",
       coverage_amount: 100_000,
       effective_date: Date.parse("2021-01-01"),
-      plan_code: "T15"
+      plan_code: "T15",
+      coverage_terms: 15
     )
     calculator = PremiumCalculator.new(quote: quote)
     expected = 107
@@ -40,7 +41,8 @@ class PremiumCalculatorTest < Minitest::Test
       smoking_status: "N",
       coverage_amount: 100_000,
       effective_date: Date.parse("2021-01-01"),
-      plan_code: "T15"
+      plan_code: "T15",
+      coverage_terms: 15
     )
     calculator = PremiumCalculator.new(quote: quote)
     expected = 108
@@ -54,7 +56,8 @@ class PremiumCalculatorTest < Minitest::Test
       smoking_status: "S",
       coverage_amount: 100_000,
       effective_date: Date.parse("2021-01-01"),
-      plan_code: "T15"
+      plan_code: "T15",
+      coverage_terms: 15
     )
     calculator = PremiumCalculator.new(quote: quote)
     expected = 153
@@ -68,7 +71,8 @@ class PremiumCalculatorTest < Minitest::Test
       smoking_status: "N",
       coverage_amount: 150_000,
       effective_date: Date.parse("2021-01-01"),
-      plan_code: "T15"
+      plan_code: "T15",
+      coverage_terms: 15
     )
     calculator = PremiumCalculator.new(quote: quote)
     expected = 120
@@ -82,7 +86,8 @@ class PremiumCalculatorTest < Minitest::Test
       smoking_status: "N",
       coverage_amount: 100_000,
       effective_date: Date.parse("2021-01-01"),
-      plan_code: "T15"
+      plan_code: "T15",
+      coverage_terms: 15
     )
     calculator = PremiumCalculator.new(quote: quote)
     expected = 934 
@@ -96,7 +101,8 @@ class PremiumCalculatorTest < Minitest::Test
       smoking_status: "N",
       coverage_amount: 100_000,
       effective_date: Date.parse("2021-01-01"),
-      plan_code: "T15"
+      plan_code: "T15",
+      coverage_terms: 15
     )
     calculator = PremiumCalculator.new(quote: quote)
     assert_nil(calculator.premium_amount)
@@ -109,7 +115,8 @@ class PremiumCalculatorTest < Minitest::Test
       smoking_status: "X",
       coverage_amount: 100_000,
       effective_date: Date.parse("2021-01-01"),
-      plan_code: "T15"
+      plan_code: "T15",
+      coverage_terms: 15
     )
     calculator = PremiumCalculator.new(quote: quote)
     assert_nil(calculator.premium_amount)
@@ -122,7 +129,8 @@ class PremiumCalculatorTest < Minitest::Test
       smoking_status: "N",
       coverage_amount: 100_000, 
       effective_date: Date.parse("2021-01-01"),
-      plan_code: "T15"
+      plan_code: "T15",
+      coverage_terms: 15
     )
     calculator = PremiumCalculator.new(quote: quote)
     assert_nil(calculator.premium_amount)
