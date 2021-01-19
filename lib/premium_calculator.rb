@@ -90,7 +90,6 @@ class PremiumRate
   end
 
   def rate
-    premium_rates = PremiumRates.new(plan_code: plan_code)
     rates = premium_rates.rates
 
     raise PremiumRateNotFoundError.new("Premium Rate Not Found", :coverage_terms) unless rates[coverage_terms]
