@@ -74,7 +74,7 @@ end
 
 class PremiumRate
   attr_reader :gender, :smoking_status, :age, :plan_code
-  attr_reader :coverage_terms
+  attr_reader :coverage_terms, :premium_rates
 
   def initialize(gender:, smoking_status:, age:, plan_code:,
     coverage_terms:)
@@ -83,6 +83,10 @@ class PremiumRate
     @age = age
     @plan_code = plan_code
     @coverage_terms = coverage_terms
+  end
+
+  def premium_rates
+    @premium_rates ||= PremiumRates.new(plan_code: plan_code)
   end
 
   def rate
