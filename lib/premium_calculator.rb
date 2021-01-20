@@ -99,6 +99,10 @@ class PremiumRate
 
     rates[coverage_terms][gender][smoking_status][age]
   end
+
+  def divisor
+    premium_rates.divisor
+  end
 end
 
 class PremiumRateNotFoundError < StandardError
@@ -116,12 +120,16 @@ class PremiumRates
 
   def initialize(plan_code:)
     @plan_code = plan_code
+    filename = "config/#{@plan_code}/premium_rates.yaml"
+    @premium_rates = File.exists?(filename) ? YAML.load(File.read(filename)) : nil
   end
 
   def rates
-    filename = "config/#{plan_code}/premium_rates.yaml"
-    return nil unless File.exists?(filename)
-    @rates ||= YAML.load(File.read(filename))
+    @premium_rates
+  end
+
+  def divisor
+    @premium_rates['divisor']
   end
 end
 
