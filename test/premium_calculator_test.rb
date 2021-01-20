@@ -367,6 +367,18 @@ class PremiumRateTest < Minitest::Test
     error = assert_raises(PremiumRateNotFoundError) { premium_rate.rate }
     assert_equal(:coverage_terms, error.key)
   end
+
+  def test_divisor_plan_t15
+    premium_rate = PremiumRate.new(
+      gender: "F",
+      smoking_status: "N",
+      age: 18,
+      plan_code: "T15",
+      coverage_terms: 15
+    )
+    expected = 100_000.00
+    assert_equal(expected, premium_rate.divisor)
+  end
 end
 
 class PremiumRatesTest < Minitest::Test
