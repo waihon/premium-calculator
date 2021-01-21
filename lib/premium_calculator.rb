@@ -125,7 +125,7 @@ class PremiumRates
   end
 
   def rates
-    @premium_rates
+    @premium_rates && @premium_rates["rates"]
   end
 
   def divisor
