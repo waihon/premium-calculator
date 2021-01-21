@@ -379,6 +379,17 @@ class PremiumRateTest < Minitest::Test
     expected = 100_000.00
     assert_equal(expected, premium_rate.divisor)
   end
+
+  def test_divisor_invalid_plan
+    premium_rate = PremiumRate.new(
+      gender: "F",
+      smoking_status: "N",
+      age: 18,
+      plan_code: "XXX",
+      coverage_terms: 15
+    )
+    assert_nil(premium_rate.divisor)
+  end
 end
 
 class PremiumRatesTest < Minitest::Test
