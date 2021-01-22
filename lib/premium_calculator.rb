@@ -15,6 +15,7 @@ class PremiumCalculator
                                    plan_code: quote.plan_code,
                                    coverage_terms: quote.coverage_terms)
     begin
+      quote.coverage_amount * premium_rate.rate / premium_rate.divisor 
       quote.coverage_amount * premium_rate.rate / rate_divisor
     rescue PremiumRateNotFoundError => e
       puts "#{e.message} for #{e.key}"
