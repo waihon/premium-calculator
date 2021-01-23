@@ -81,6 +81,12 @@ class QuoteModel
   attr_accessor :gender, :date_of_birth, :smoking_status
   attr_accessor :coverage_amount, :effective_date
   attr_accessor :plan_code, :coverage_terms
+
+  def initialize(attributes={})
+    attributes.each do |name, value|
+      send("#{name}=", value)
+    end
+  end
 end
 
 class PremiumRate
