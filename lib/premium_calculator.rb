@@ -93,6 +93,7 @@ class QuoteModel
   validates :gender, presence: true
   validates :gender, inclusion: { in: %w(F M) }
   validates :date_of_birth, presence: true
+  validates :date_of_birth, date: true
 
   def initialize(attributes={})
     attributes.each do |name, value|
