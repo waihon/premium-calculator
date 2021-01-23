@@ -1,4 +1,5 @@
 require 'yaml'
+require 'active_model'
 
 class PremiumCalculator
   attr_reader :quote
@@ -70,6 +71,12 @@ class Quote
     @plan_code = plan_code
     @coverage_terms = coverage_terms
   end
+end
+
+class QuoteModel
+  include ActiveModel::Validations
+  include ActiveModel::Conversion
+  extend ActiveModel::Naming
 end
 
 class PremiumRate
