@@ -171,6 +171,12 @@ class QuoteModelTest < Minitest::Test
     assert_equal(true, quote.errors[:date_of_birth].any?)
     assert_match(/is an invalid date/, quote.errors[:date_of_birth].first)
   end
+
+  def test_date_of_birth_is_valid
+    quote = QuoteModel.new(date_of_birth: Date.parse("1990-08-16"))
+    quote.valid?
+    assert_equal(false, quote.errors[:date_of_birth].any?)
+  end
 end
 
 class AgeCalculatorTest < Minitest::Test
