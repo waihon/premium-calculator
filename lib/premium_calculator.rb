@@ -21,10 +21,6 @@ class PremiumCalculator
       puts "#{e.message} for #{e.key}"
     end
   end
-
-  def rate_divisor
-    100_000.0
-  end
 end
 
 class AgeCalculator
