@@ -137,6 +137,13 @@ class PremiumCalculatorTest < Minitest::Test
   end
 end
 
+class QuoteModelTest < Minitest::Test
+  def test_gender_is_valid
+    quote = QuoteModel.new(gender: "F")
+    assert_equal(true, quote.valid?)
+  end
+end
+
 class AgeCalculatorTest < Minitest::Test
   def test_birthday_on_birthday
     age = AgeCalculator.new(date_of_birth: Date.parse("2003-01-01"),
