@@ -82,6 +82,8 @@ class QuoteModel
   attr_accessor :coverage_amount, :effective_date
   attr_accessor :plan_code, :coverage_terms
 
+  validates :gender, inclusion: { in: %w(F M) }
+
   def initialize(attributes={})
     attributes.each do |name, value|
       send("#{name}=", value)

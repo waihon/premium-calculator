@@ -142,6 +142,11 @@ class QuoteModelTest < Minitest::Test
     quote = QuoteModel.new(gender: "F")
     assert_equal(true, quote.valid?)
   end
+
+  def test_gender_is_invalid
+    quote = QuoteModel.new(gender: "X")
+    assert_equal(false, quote.valid?)
+  end
 end
 
 class AgeCalculatorTest < Minitest::Test
