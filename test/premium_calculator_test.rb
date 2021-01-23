@@ -138,6 +138,13 @@ class PremiumCalculatorTest < Minitest::Test
 end
 
 class QuoteModelTest < Minitest::Test
+  def test_gender_is_required
+    quote = QuoteModel.new(gender: "")
+    assert_equal(false, quote.valid?)
+    assert_equal(true, quote.errors[:gender].any?)
+    assert_match(/can't be blank/, quote.errors[:gender].first)
+  end
+
   def test_gender_is_valid
     quote = QuoteModel.new(gender: "F")
     assert_equal(true, quote.valid?)
