@@ -147,7 +147,8 @@ class QuoteModelTest < Minitest::Test
 
   def test_gender_is_valid
     quote = QuoteModel.new(gender: "F")
-    assert_equal(true, quote.valid?)
+    quote.valid?
+    assert_equal(false, quote.errors[:gender].any?)
   end
 
   def test_gender_is_invalid
