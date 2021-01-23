@@ -155,6 +155,13 @@ class QuoteModelTest < Minitest::Test
     assert_equal(false, quote.valid?)
     assert_match(/is not included in the list/, quote.errors[:gender].first)
   end
+
+  def test_date_of_birth_is_required
+    quote = QuoteModel.new(date_of_birth: nil)
+    quote.valid?
+    assert_equal(true, quote.errors[:date_of_birth].any?)
+    assert_match(/can't be blank/, quote.errors[:date_of_birth].first)
+  end
 end
 
 class AgeCalculatorTest < Minitest::Test
