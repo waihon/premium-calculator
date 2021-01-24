@@ -93,7 +93,8 @@ class QuoteModel
   validates :smoking_status, presence: true
   validates :smoking_status, inclusion: { in: %w(N S) }
   validates :coverage_amount, presence: true
-  validates :coverage_amount, numericality: { greater_than_or_equal_to: 10_000 }
+  validates :coverage_amount, numericality: { greater_than_or_equal_to: 10_000,
+                                              less_than_or_equal_to: 10_000_000 }
 
   def initialize(attributes={})
     attributes.each do |name, value|
