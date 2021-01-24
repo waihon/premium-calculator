@@ -215,6 +215,17 @@ class QuoteModelTest < Minitest::Test
     quote.valid?
     assert_equal(true, quote.errors[:coverage_amount].any?)
   end
+
+  def test_coverage_amount_is_less_than_minimum
+    quote = QuoteModel.new
+    %w(-100_000 0 9_999.99).each do |amount|
+      coverage_amount = amount.to_f
+      quote.coverage_amount = coverage_amount
+      quote.valid?
+      assert_equal(true, quote.errors[:coverage_amount].any?)
+      assert_match(/must be greater than or equal to/, quote.errors[:coverage_amount].first)
+    end
+  end
 end
 
 class AgeCalculatorTest < Minitest::Test
