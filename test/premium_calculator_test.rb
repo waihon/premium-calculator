@@ -152,10 +152,13 @@ class QuoteModelTest < Minitest::Test
   end
 
   def test_gender_is_invalid
-    quote = QuoteModel.new(gender: "X")
-    quote.valid?
-    assert_equal(true, quote.errors[:gender].any?)
-    assert_match(/is not included in the list/, quote.errors[:gender].first)
+    quote = QuoteModel.new
+    %w(f m U u Female Male Unknown).each do |gender|
+      quote.gender = gender
+      quote.valid?
+      assert_equal(true, quote.errors[:gender].any?)
+      assert_match(/is not included in the list/, quote.errors[:gender].first)
+    end
   end
 
   def test_date_of_birth_is_required
