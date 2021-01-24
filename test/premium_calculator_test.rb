@@ -234,6 +234,7 @@ class QuoteModelTest < Minitest::Test
       quote.coverage_amount = amount
       quote.valid?
       assert_equal(true, quote.errors[:coverage_amount].any?)
+      assert_match(/must be less than or equal to/, quote.errors[:coverage_amount].first)
     end
   end  
 end
