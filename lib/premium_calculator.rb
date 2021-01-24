@@ -91,6 +91,7 @@ class QuoteModel
   validates :date_of_birth, presence: true
   validates :date_of_birth, date: true
   validates :smoking_status, presence: true
+  validates :smoking_status, inclusion: { in: %w(N S) }
 
   def initialize(attributes={})
     attributes.each do |name, value|
