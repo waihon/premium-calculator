@@ -226,6 +226,16 @@ class QuoteModelTest < Minitest::Test
       assert_match(/must be greater than or equal to/, quote.errors[:coverage_amount].first)
     end
   end
+
+  def test_coverage_amount_is_more_than_maximum
+    quote = QuoteModel.new
+    %w(10_000_000.01 50_000_000 100_000_000).each do |amount|
+      coverage_amount = amount.to_f
+      quote.coverage_amount = amount
+      quote.valid?
+      assert_equal(true, quote.errors[:coverage_amount].any?)
+    end
+  end  
 end
 
 class AgeCalculatorTest < Minitest::Test
