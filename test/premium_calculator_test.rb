@@ -186,10 +186,13 @@ class QuoteModelTest < Minitest::Test
   end
 
   def test_smoking_status_is_invalid
-    quote = QuoteModel.new(smoking_status: "X")
-    quote.valid?
-    assert_equal(true, quote.errors[:smoking_status].any?)
-    assert_match(/is not included in the list/, quote.errors[:smoking_status].first) 
+    quote = QuoteModel.new
+    %w(X Y No Yes Non-Smoker Smoker).each do |smoking_status|
+      quote.smoking_status = smoking_status
+      quote.valid?
+      assert_equal(true, quote.errors[:smoking_status].any?)
+      assert_match(/is not included in the list/, quote.errors[:smoking_status].first)
+    end
   end
 
   def test_smoking_status_is_invalid
