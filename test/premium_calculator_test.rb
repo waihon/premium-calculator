@@ -177,6 +177,13 @@ class QuoteModelTest < Minitest::Test
     quote.valid?
     assert_equal(false, quote.errors[:date_of_birth].any?)
   end
+
+  def test_smoking_status_is_required
+    quote = QuoteModel.new(smoking_status: "")
+    quote.valid?
+    assert_equal(true, quote.errors[:smoking_status].any?)
+    assert_match(/can't be blank/, quote.errors[:smoking_status].first) 
+  end
 end
 
 class AgeCalculatorTest < Minitest::Test
