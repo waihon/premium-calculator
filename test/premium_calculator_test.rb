@@ -209,6 +209,12 @@ class QuoteModelTest < Minitest::Test
       assert_equal(false, quote.errors[:smoking_status].any?)
     end
   end
+
+  def test_coverage_amount_is_required
+    quote = QuoteModel.new(coverage_amount: nil)
+    quote.valid?
+    assert_equal(true, quote.errors[:coverage_amount].any?)
+  end
 end
 
 class AgeCalculatorTest < Minitest::Test
