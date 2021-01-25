@@ -95,6 +95,7 @@ class QuoteModel
   validates :coverage_amount, presence: true
   validates :coverage_amount, numericality: { greater_than_or_equal_to: 10_000,
                                               less_than_or_equal_to: 10_000_000 }
+  validates :effective_date, presence: true
 
   def initialize(attributes={})
     attributes.each do |name, value|
