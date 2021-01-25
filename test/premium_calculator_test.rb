@@ -244,6 +244,17 @@ class QuoteModelTest < Minitest::Test
     assert_equal(true, quote.errors[:effective_date].any?)
     assert_match(/can't be blank/, quote.errors[:effective_date].first)
   end
+
+  def test_effective_date_is_invalid
+    quote = QuoteModel.new
+    dates = [19900816, "1990-08-16", "August 16, 1990", "16 August 1990"]
+    dates.each do |date|
+      quote.effective_date = date
+      quote.valid?
+      assert_equal(true, quote.errors[:effective_date].any?)
+      assert_match(/is an invalid date/, quote.errors[:effective_date].first)
+    end
+  end
 end
 
 class AgeCalculatorTest < Minitest::Test
