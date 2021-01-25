@@ -237,6 +237,13 @@ class QuoteModelTest < Minitest::Test
       assert_match(/must be less than or equal to/, quote.errors[:coverage_amount].first)
     end
   end  
+
+  def test_effective_date_is_required
+    quote = QuoteModel.new(effective_date: nil)
+    quote.valid?
+    assert_equal(true, quote.errors[:effective_date].any?)
+    assert_match(/can't be blank/, quote.errors[:effective_date].first)
+  end
 end
 
 class AgeCalculatorTest < Minitest::Test
