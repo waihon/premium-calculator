@@ -265,6 +265,13 @@ class QuoteModelTest < Minitest::Test
       assert_equal(false, quote.errors[:effective_date].any?)
     end
   end
+
+  def test_plan_code_is_required
+    quote = QuoteModel.new(plan_code: "")
+    quote.valid?
+    assert_equal(true, quote.errors[:plan_code].any?)
+    assert_match(/can't be blank/, quote.errors[:plan_code].first)
+  end
 end
 
 class AgeCalculatorTest < Minitest::Test
