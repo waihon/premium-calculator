@@ -97,6 +97,7 @@ class QuoteModel
                                               less_than_or_equal_to: 10_000_000 }
   validates :effective_date, presence: true
   validates :effective_date, date: true
+  validates :plan_code, presence: true
 
   def initialize(attributes={})
     attributes.each do |name, value|
