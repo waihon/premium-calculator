@@ -272,6 +272,17 @@ class QuoteModelTest < Minitest::Test
     assert_equal(true, quote.errors[:plan_code].any?)
     assert_match(/can't be blank/, quote.errors[:plan_code].first)
   end
+
+  def test_plan_code_is_invalid
+    quote = QuoteModel.new
+    plan_codes = ['ABC', 'XYZ', 'Term', 'Whole Life', 'Medical']
+    plan_codes.each do |plan_code|
+      quote.plan_code = plan_code
+      quote.valid?
+      assert_equal(true, quote.errors[:plan_code].any?)
+      assert_match(/is not included in the list/, quote.errors[:plan_code].first)
+    end
+  end
 end
 
 class AgeCalculatorTest < Minitest::Test
