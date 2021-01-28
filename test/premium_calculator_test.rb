@@ -315,6 +315,16 @@ class QuoteModelTest < Minitest::Test
       assert_match(/is not a number/, quote.errors[:coverage_terms].first)
     end
   end
+
+  def test_coverage_terms_is_numeric
+    quote = QuoteModel.new
+    coverage_terms = [5, 10, 15, 20, 25, 30]
+    coverage_terms.each do |terms|
+      quote.coverage_terms = terms
+      quote.valid?
+      assert_equal(false, quote.errors[:coverage_terms].any?)
+    end
+  end
 end
 
 class AgeCalculatorTest < Minitest::Test
