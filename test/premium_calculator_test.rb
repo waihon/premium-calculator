@@ -325,6 +325,17 @@ class QuoteModelTest < Minitest::Test
       assert_equal(false, quote.errors[:coverage_terms].any?)
     end
   end
+
+  def test_coverage_terms_is_not_integer
+    quote = QuoteModel.new
+    coverage_terms = [5.0, 15.5, 29.99]
+    coverage_terms.each do |terms|
+      quote.coverage_terms = terms
+      quote.valid?
+      assert_equal(true, quote.errors[:coverage_terms].any?)
+      assert_match(/must be an integer/, quote.errors[:coverage_terms].first)
+    end
+  end
 end
 
 class AgeCalculatorTest < Minitest::Test
