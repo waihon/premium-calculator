@@ -99,6 +99,7 @@ class QuoteModel
   validates :effective_date, date: true
   validates :plan_code, presence: true
   validates :plan_code, inclusion: { in: %w(T15) }
+  validates :coverage_terms, presence: true
 
   def initialize(attributes={})
     attributes.each do |name, value|
