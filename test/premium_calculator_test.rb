@@ -283,6 +283,16 @@ class QuoteModelTest < Minitest::Test
       assert_match(/is not included in the list/, quote.errors[:plan_code].first)
     end
   end
+
+  def test_plan_code_is_valid
+    quote = QuoteModel.new
+    plan_codes = %w(T15)
+    plan_codes.each do |plan_code|
+      quote.plan_code = plan_code
+      quote.valid?
+      assert_equal(false, quote.errors[:plan_code].any?)
+    end
+  end
 end
 
 class AgeCalculatorTest < Minitest::Test
