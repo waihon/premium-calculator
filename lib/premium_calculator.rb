@@ -77,6 +77,14 @@ class DateValidator < ActiveModel::EachValidator
   end
 end
 
+class NumericValidator < ActiveModel::EachValidator
+  def validate_each(record, attribute, value)
+    unless value.is_a? Numeric
+      record.errors.add(attribute, options[:message] || "is not a number")
+    end
+  end
+end
+
 class QuoteModel
   include ActiveModel::Validations
   include ActiveModel::Conversion
@@ -100,6 +108,7 @@ class QuoteModel
   validates :plan_code, presence: true
   validates :plan_code, inclusion: { in: %w(T15) }
   validates :coverage_terms, presence: true
+  validates :coverage_terms, numeric: true
 
   def initialize(attributes={})
     attributes.each do |name, value|
