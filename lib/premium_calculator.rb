@@ -109,6 +109,7 @@ class QuoteModel
   validates :plan_code, inclusion: { in: %w(T15) }
   validates :coverage_terms, presence: true
   validates :coverage_terms, numeric: true
+  validates :coverage_terms, numericality: { only_integer: true }
 
   def initialize(attributes={})
     attributes.each do |name, value|
