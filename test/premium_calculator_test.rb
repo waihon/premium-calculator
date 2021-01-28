@@ -293,6 +293,17 @@ class QuoteModelTest < Minitest::Test
       assert_equal(false, quote.errors[:plan_code].any?)
     end
   end
+
+  def test_coverage_terms_is_required
+    quote = QuoteModel.new
+    quote.valid?
+    assert_equal(true, quote.errors[:coverage_terms].any?)
+    assert_match(/can't be blank/, quote.errors[:coverage_terms].first)
+    quote.coverage_terms = nil
+    quote.valid?
+    assert_equal(true, quote.errors[:coverage_terms].any?)
+    assert_match(/can't be blank/, quote.errors[:coverage_terms].first)
+  end
 end
 
 class AgeCalculatorTest < Minitest::Test
