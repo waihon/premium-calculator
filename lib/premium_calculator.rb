@@ -51,6 +51,22 @@ class AgeCalculator
   end
 end
 
+class DateValidator < ActiveModel::EachValidator
+  def validate_each(record, attribute, value)
+    unless value.respond_to?(:strftime) 
+      record.errors.add(attribute, options[:message] || "is an invalid date")
+    end
+  end
+end
+
+class NumericValidator < ActiveModel::EachValidator
+  def validate_each(record, attribute, value)
+    unless value.is_a? Numeric
+      record.errors.add(attribute, options[:message] || "is not a number")
+    end
+  end
+end
+
 class Quote
   include ActiveModel::Validations
   include ActiveModel::Conversion
@@ -80,22 +96,6 @@ class Quote
   def initialize(attributes={})
     attributes.each do |name, value|
       send("#{name}=", value)
-    end
-  end
-end
-
-class DateValidator < ActiveModel::EachValidator
-  def validate_each(record, attribute, value)
-    unless value.respond_to?(:strftime) 
-      record.errors.add(attribute, options[:message] || "is an invalid date")
-    end
-  end
-end
-
-class NumericValidator < ActiveModel::EachValidator
-  def validate_each(record, attribute, value)
-    unless value.is_a? Numeric
-      record.errors.add(attribute, options[:message] || "is not a number")
     end
   end
 end
