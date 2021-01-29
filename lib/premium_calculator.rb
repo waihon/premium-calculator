@@ -100,43 +100,6 @@ class Quote
   end
 end
 
-class QuoteModel
-  include ActiveModel::Validations
-  include ActiveModel::Conversion
-  extend ActiveModel::Naming
-
-  attr_accessor :gender, :date_of_birth, :smoking_status
-  attr_accessor :coverage_amount, :effective_date
-  attr_accessor :plan_code, :coverage_terms
-
-  validates :gender, presence: true
-  validates :gender, inclusion: { in: %w(F M) }
-  validates :date_of_birth, presence: true
-  validates :date_of_birth, date: true
-  validates :smoking_status, presence: true
-  validates :smoking_status, inclusion: { in: %w(N S) }
-  validates :coverage_amount, presence: true
-  validates :coverage_amount, numericality: { greater_than_or_equal_to: 10_000,
-                                              less_than_or_equal_to: 10_000_000 }
-  validates :effective_date, presence: true
-  validates :effective_date, date: true
-  validates :plan_code, presence: true
-  validates :plan_code, inclusion: { in: %w(T15) }
-  validates :coverage_terms, presence: true
-  validates :coverage_terms, numeric: true
-  validates :coverage_terms, numericality: { only_integer: true }
-
-  def initialize(attributes={})
-    attributes.each do |name, value|
-      send("#{name}=", value)
-    end
-  end
-
-  def persisted?
-    false
-  end
-end
-
 class PremiumRate
   attr_reader :gender, :smoking_status, :age, :plan_code
   attr_reader :coverage_terms, :premium_rates
