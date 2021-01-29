@@ -52,6 +52,10 @@ class AgeCalculator
 end
 
 class Quote
+  include ActiveModel::Validations
+  include ActiveModel::Conversion
+  extend ActiveModel::Naming
+
   attr_accessor :gender, :date_of_birth, :smoking_status
   attr_accessor :coverage_amount, :effective_date
   attr_accessor :plan_code, :coverage_terms
