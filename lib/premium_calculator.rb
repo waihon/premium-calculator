@@ -98,6 +98,10 @@ class Quote
       send("#{name}=", value)
     end
   end
+
+  def persisted?
+    false
+  end  
 end
 
 class PremiumRate
