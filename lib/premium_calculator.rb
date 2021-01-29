@@ -52,9 +52,9 @@ class AgeCalculator
 end
 
 class Quote
-  attr_reader :gender, :date_of_birth, :smoking_status
-  attr_reader :coverage_amount, :effective_date
-  attr_reader :plan_code, :coverage_terms
+  attr_accessor :gender, :date_of_birth, :smoking_status
+  attr_accessor :coverage_amount, :effective_date
+  attr_accessor :plan_code, :coverage_terms
 
   def initialize(gender:, date_of_birth:, smoking_status:,
                  coverage_amount:, effective_date: Date.today,
