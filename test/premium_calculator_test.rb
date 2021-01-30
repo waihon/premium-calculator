@@ -4,6 +4,15 @@ require 'date'
 require_relative '../lib/premium_calculator'
 
 class PremiumCalculatorTest < Minitest::Test
+  def setup
+    @original_stdout = $stdout.clone
+    $stdout.reopen File.new('/dev/null', 'w')
+  end
+
+  def teardown
+    $stdout.reopen @original_stdout
+  end
+
   def test_premium_female_non_smoker
     quote = Quote.new(
       gender: "F",
