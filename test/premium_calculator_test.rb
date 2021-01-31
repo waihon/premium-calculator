@@ -127,8 +127,8 @@ class PremiumCalculatorTest < Minitest::Test
       plan_code: "T15",
       coverage_terms: 15
     )
-    calculator = PremiumCalculator.new(quote: quote)
-    assert_nil(calculator.premium_amount)
+    error = assert_raises(ArgumentError) { PremiumCalculator.new(quote: quote) }
+    assert_match(/invalid quote object/, error.message)
   end
 
   def test_premium_unknown_gender
@@ -141,8 +141,8 @@ class PremiumCalculatorTest < Minitest::Test
       plan_code: "T15",
       coverage_terms: 15
     )
-    calculator = PremiumCalculator.new(quote: quote)
-    assert_nil(calculator.premium_amount)
+    error = assert_raises(ArgumentError) { PremiumCalculator.new(quote: quote) }
+    assert_match(/invalid quote object/, error.message)
   end
 end
 
