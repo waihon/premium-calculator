@@ -5,6 +5,9 @@ class PremiumCalculator
   attr_reader :quote, :age, :premium_rate
 
   def initialize(quote:)
+    unless quote.valid?
+      raise ArgumentError, "invalid quote object"
+    end
     @quote = quote
     @age = AgeCalculator.new(date_of_birth: quote.date_of_birth, now: quote.effective_date)
     @premium_rate = PremiumRate.new(gender: quote.gender,
