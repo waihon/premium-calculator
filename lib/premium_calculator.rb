@@ -160,6 +160,31 @@ class LifePremiumRate
   end
 end
 
+class TermBasedRate < LifePremiumRate
+  def rate 
+    rates = @premium_rates.rates
+    coverage_terms = @quote.coverage_terms
+    gender = @quote.gender
+    smoking_status = @quote.smoking_status
+    age = @age.current
+
+    unless rates[coverage_terms]
+      raise PremiumRateNotFoundError.new("premium rate not found", :coverage_terms)
+    end
+    unless rates[coverage_terms][gender]
+      raise PremiumRateNotFoundError.new("premium rate not found", :gender)
+    end
+    unless rates[coverage_terms][gender][smoking_status]
+      raise PremiumRateNotFoundError.new("premium rate not found", :smoking_status) 
+    end
+    unless rates[coverage_terms][gender][smoking_status][age]
+      raise PremiumRateNotFoundError.new("premium rate not found", :age)
+    end
+
+    rates[coverage_terms][gender][smoking_status][age]
+  end
+end
+
 class PremiumRateNotFoundError < StandardError
   attr_reader :key
 
