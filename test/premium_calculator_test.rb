@@ -635,3 +635,20 @@ class ModalFactorTest < Minitest::Test
     assert_equal(0.0865, modal_factor.monthly)
   end
 end
+
+class TermBasedRateTest < Minitest::Test
+  def test_rate_female_non_smoker
+    quote = Quote.new(
+      gender: "F",
+      date_of_birth: Date.parse("2003-01-01"),
+      smoking_status: "N",
+      plan_code: "T15",
+      effective_date: Date.parse("2021-01-01"),
+      coverage_amount: 100_000,
+      coverage_terms: 15
+    )
+    term_based_rate = TermBasedRate.new(quote: quote)
+    expected = 80
+    assert_equal(expected, term_based_rate.rate)
+  end
+end
