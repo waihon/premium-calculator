@@ -140,6 +140,26 @@ class PremiumRate
   end
 end
 
+class LifePremiumRate
+  def initialize(quote:)
+    unless quote.valid?
+      raise ArgumentError, "invalid quote object"
+    end
+
+    @quote = quote
+    @age = AgeCalculator.new(date_of_birth: quote.date_of_birth, now: quote.effective_date)
+    @premium_rates = PremiumRates.new(plan_code: quote.plan_code)
+  end
+
+  def rate
+    raise "Called abstract method: rate" 
+  end
+
+  def divisor
+    @premium_rates.divisor
+  end
+end
+
 class PremiumRateNotFoundError < StandardError
   attr_reader :key
 
