@@ -717,4 +717,10 @@ class TermBasedRateTest < Minitest::Test
     error = assert_raises(PremiumRateNotFoundError) { term_based_rate.rate }
     assert_equal(:coverage_terms, error.key)
   end
+
+  def test_divisor_plan_t15
+    term_based_rate = TermBasedRate.new(quote: @quote)
+    expected = 100_000.00
+    assert_equal(expected, term_based_rate.divisor)
+  end
 end
