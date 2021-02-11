@@ -9,7 +9,7 @@ class PremiumCalculator
       raise ArgumentError, "invalid quote object: #{quote.errors.full_messages[0]}"
     end
     @quote = quote
-    @premium_rate = TermBasedRate.new(quote: quote)
+    @premium_rate = LifePremiumRate.for(quote: quote)
   end
 
   def premium_amount
