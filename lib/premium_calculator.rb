@@ -86,7 +86,7 @@ class Quote
   validates :effective_date, presence: true
   validates :effective_date, date: true
   validates :plan_code, presence: true
-  validates :plan_code, inclusion: { in: %w(T15) }
+  validates :plan_code, inclusion: { in: %w(T15 WLF) }
   validates :coverage_terms, presence: true
   validates :coverage_terms, numeric: true
   validates :coverage_terms, numericality: { only_integer: true }
@@ -153,6 +153,27 @@ class TermBasedRate < LifePremiumRate
     end
 
     rates[coverage_terms][gender][smoking_status][age]
+  end
+end
+
+class AgeBasedRate < LifePremiumRate
+  def rate
+    rates = @premium_rates.rates
+    gender = @quote.gender
+    smoking_status = @quote.smoking_status
+    age = @age.current
+
+    unless rates[gender]
+      raise PremiumRateNotFoundError.new("premium rate not found", :gender)
+    end
+    unless rates[gender][smoking_status]
+      raise PremiumRateNotFoundError.new("premium rate not found", :smoking_status)
+    end
+    unless rates[gender][smoking_status][age]
+      raise PremiumRateNotFoundError.new("premium rate not found", :age)
+    end
+
+    rates[gender][smoking_status][age]
   end
 end
 
