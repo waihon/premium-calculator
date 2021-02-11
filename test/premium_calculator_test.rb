@@ -106,6 +106,14 @@ class PremiumCalculatorTest < Minitest::Test
     expected = 2036
     assert_equal(expected, calculator.premium_amount)
   end
+
+  def test_age_based_premium_female_smoker
+    @age_based_quote.smoking_status = "S"
+
+    calculator = PremiumCalculator.new(quote: @age_based_quote)
+    expected = 2069
+    assert_equal(expected, calculator.premium_amount)
+  end
 end
 
 class QuoteTest < Minitest::Test
