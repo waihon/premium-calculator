@@ -588,4 +588,13 @@ class AgeBasedRateTest < Minitest::Test
     expected = 2501
     assert_equal(expected, age_based_rate.rate)
   end
+
+  def test_rate_female_non_smoker_higher_age
+    @quote.date_of_birth = Date.parse("1961-01-01")
+    @quote.coverage_terms = 25
+
+    age_based_rate = AgeBasedRate.new(quote: @quote)
+    expected = 7847
+    assert_equal(expected, age_based_rate.rate)
+  end
 end
