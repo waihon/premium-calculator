@@ -687,4 +687,12 @@ class TermBasedRateTest < Minitest::Test
     expected = 934
     assert_equal(expected, term_based_rate.rate)
   end
+
+  def test_rate_female_non_smoker_unfound_age
+    @quote.date_of_birth = Date.parse("1960-01-01")
+
+    term_based_rate = TermBasedRate.new(quote: @quote)
+    error = assert_raises(PremiumRateNotFoundError) { term_based_rate.rate }
+    assert_equal(:age, error.key)
+  end
 end
