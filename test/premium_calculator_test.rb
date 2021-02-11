@@ -7,6 +7,16 @@ class PremiumCalculatorTest < Minitest::Test
   def setup
     @original_stdout = $stdout.clone
     $stdout.reopen File.new('/dev/null', 'w')
+
+    @quote = Quote.new(
+      gender: "F",
+      date_of_birth: Date.parse("2003-01-01"),
+      smoking_status: "N",
+      coverage_amount: 100_000,
+      effective_date: Date.parse("2021-01-01"),
+      plan_code: "T15",
+      coverage_terms: 15
+    )
   end
 
   def teardown
@@ -14,135 +24,71 @@ class PremiumCalculatorTest < Minitest::Test
   end
 
   def test_premium_female_non_smoker
-    quote = Quote.new(
-      gender: "F",
-      date_of_birth: Date.parse("2003-01-01"),
-      smoking_status: "N",
-      coverage_amount: 100_000,
-      effective_date: Date.parse("2021-01-01"),
-      plan_code: "T15",
-      coverage_terms: 15
-    )
-    calculator = PremiumCalculator.new(quote: quote)
+    calculator = PremiumCalculator.new(quote: @quote)
     expected = 80
     assert_equal(expected, calculator.premium_amount)
   end
 
   def test_premium_female_smoker
-    quote = Quote.new(
-      gender: "F",
-      date_of_birth: Date.parse("2003-01-01"),
-      smoking_status: "S",
-      coverage_amount: 100_000,
-      effective_date: Date.parse("2021-01-01"),
-      plan_code: "T15",
-      coverage_terms: 15
-    )
-    calculator = PremiumCalculator.new(quote: quote)
+    @quote.smoking_status = "S"
+
+    calculator = PremiumCalculator.new(quote: @quote)
     expected = 107
     assert_equal(expected, calculator.premium_amount)
   end
 
   def test_premium_male_non_smoker
-    quote = Quote.new(
-      gender: "M",
-      date_of_birth: Date.parse("2003-01-01"),
-      smoking_status: "N",
-      coverage_amount: 100_000,
-      effective_date: Date.parse("2021-01-01"),
-      plan_code: "T15",
-      coverage_terms: 15
-    )
-    calculator = PremiumCalculator.new(quote: quote)
+    @quote.gender = "M"
+
+    calculator = PremiumCalculator.new(quote: @quote)
     expected = 108
     assert_equal(expected, calculator.premium_amount)
   end
 
   def test_premium_male_smoker
-    quote = Quote.new(
-      gender: "M",
-      date_of_birth: Date.parse("2003-01-01"),
-      smoking_status: "S",
-      coverage_amount: 100_000,
-      effective_date: Date.parse("2021-01-01"),
-      plan_code: "T15",
-      coverage_terms: 15
-    )
-    calculator = PremiumCalculator.new(quote: quote)
+    @quote.gender = "M"
+    @quote.smoking_status = "S"
+
+    calculator = PremiumCalculator.new(quote: @quote)
     expected = 153
     assert_equal(expected, calculator.premium_amount)
   end
 
   def test_premium_higher_coverage_amount
-    quote = Quote.new(
-      gender: "F",
-      date_of_birth: Date.parse("2003-01-01"),
-      smoking_status: "N",
-      coverage_amount: 150_000,
-      effective_date: Date.parse("2021-01-01"),
-      plan_code: "T15",
-      coverage_terms: 15
-    )
-    calculator = PremiumCalculator.new(quote: quote)
+    @quote.coverage_amount = 150_000
+
+    calculator = PremiumCalculator.new(quote: @quote)
     expected = 120
     assert_equal(expected, calculator.premium_amount)
   end
 
   def test_premium_earlier_date_of_birth
-    quote = Quote.new(
-      gender: "F",
-      date_of_birth: Date.parse("1961-01-01"),
-      smoking_status: "N",
-      coverage_amount: 100_000,
-      effective_date: Date.parse("2021-01-01"),
-      plan_code: "T15",
-      coverage_terms: 15
-    )
-    calculator = PremiumCalculator.new(quote: quote)
+    @quote.date_of_birth = Date.parse("1961-01-01")
+
+    calculator = PremiumCalculator.new(quote: @quote)
     expected = 934 
     assert_equal(expected, calculator.premium_amount)
   end
 
   def test_premium_female_non_smoker_unfound_age
-    quote = Quote.new(
-      gender: "F",
-      date_of_birth: Date.parse("2004-01-01"),
-      smoking_status: "N",
-      coverage_amount: 100_000,
-      effective_date: Date.parse("2021-01-01"),
-      plan_code: "T15",
-      coverage_terms: 15
-    )
-    calculator = PremiumCalculator.new(quote: quote)
+    @quote.date_of_birth = Date.parse("2004-01-01")
+
+    calculator = PremiumCalculator.new(quote: @quote)
     assert_nil(calculator.premium_amount)
   end
 
   def test_premium_female_unknown_smoking_status
-    quote = Quote.new(
-      gender: "F",
-      date_of_birth: Date.parse("2003-01-01"),
-      smoking_status: "X",
-      coverage_amount: 100_000,
-      effective_date: Date.parse("2021-01-01"),
-      plan_code: "T15",
-      coverage_terms: 15
-    )
-    error = assert_raises(ArgumentError) { PremiumCalculator.new(quote: quote) }
-    assert_match(/invalid quote object/, error.message)
+    @quote.smoking_status = "X"
+
+    error = assert_raises(ArgumentError) { PremiumCalculator.new(quote: @quote) }
+    assert_match(/smoking status/i, error.message)
   end
 
   def test_premium_unknown_gender
-    quote = Quote.new(
-      gender: "X",
-      date_of_birth: Date.parse("2003-01-01"),
-      smoking_status: "N",
-      coverage_amount: 100_000, 
-      effective_date: Date.parse("2021-01-01"),
-      plan_code: "T15",
-      coverage_terms: 15
-    )
-    error = assert_raises(ArgumentError) { PremiumCalculator.new(quote: quote) }
-    assert_match(/invalid quote object/, error.message)
+    @quote.gender = "X"
+
+    error = assert_raises(ArgumentError) { PremiumCalculator.new(quote: @quote) }
+    assert_match(/gender/i, error.message)
   end
 end
 
