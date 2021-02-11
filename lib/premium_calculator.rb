@@ -136,6 +136,15 @@ class PremiumRate
 end
 
 class LifePremiumRate
+  def self.for(quote:)
+    case quote.plan_code
+    when "T15"
+      TermBasedRate
+    else
+      LifePremiumRate
+    end.new(quote: quote)
+  end
+
   def initialize(quote:)
     unless quote.valid?
       raise ArgumentError, "invalid quote object: #{quote.errors.full_messages[0]}"
