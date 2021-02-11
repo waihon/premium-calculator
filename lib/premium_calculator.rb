@@ -102,39 +102,6 @@ class Quote
   end  
 end
 
-class PremiumRate
-  attr_reader :gender, :smoking_status, :age, :plan_code
-  attr_reader :coverage_terms, :premium_rates
-
-  def initialize(gender:, smoking_status:, age:, plan_code:,
-    coverage_terms:)
-    @gender = gender
-    @smoking_status = smoking_status
-    @age = age
-    @plan_code = plan_code
-    @coverage_terms = coverage_terms
-  end
-
-  def premium_rates
-    @premium_rates ||= PremiumRates.new(plan_code: plan_code)
-  end
-
-  def rate
-    rates = premium_rates.rates
-
-    raise PremiumRateNotFoundError.new("Premium Rate Not Found", :coverage_terms) unless rates[coverage_terms]
-    raise PremiumRateNotFoundError.new("Premium Rate Not Found", :gender) unless rates[coverage_terms][gender]
-    raise PremiumRateNotFoundError.new("Premium Rate Not Found", :smoking_status) unless rates[coverage_terms][gender][smoking_status]
-    raise PremiumRateNotFoundError.new("Premium Rate Not Found", :age) unless rates[coverage_terms][gender][smoking_status][age]
-
-    rates[coverage_terms][gender][smoking_status][age]
-  end
-
-  def divisor
-    premium_rates.divisor
-  end
-end
-
 class LifePremiumRate
   def self.for(quote:)
     case quote.plan_code
