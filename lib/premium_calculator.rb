@@ -6,15 +6,10 @@ class PremiumCalculator
 
   def initialize(quote:)
     unless quote.valid?
-      raise ArgumentError, "invalid quote object"
+      raise ArgumentError, "invalid quote object: #{quote.errors.full_messages[0]}"
     end
     @quote = quote
-    @age = AgeCalculator.new(date_of_birth: quote.date_of_birth, now: quote.effective_date)
-    @premium_rate = PremiumRate.new(gender: quote.gender,
-                                   smoking_status: quote.smoking_status,
-                                   age: age.current,
-                                   plan_code: quote.plan_code,
-                                   coverage_terms: quote.coverage_terms)
+    @premium_rate = TermBasedRate.new(quote: quote)
   end
 
   def premium_amount
