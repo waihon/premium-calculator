@@ -695,4 +695,11 @@ class TermBasedRateTest < Minitest::Test
     error = assert_raises(PremiumRateNotFoundError) { term_based_rate.rate }
     assert_equal(:age, error.key)
   end
+
+  def test_rate_female_unknown_smoking_status
+    @quote.smoking_status = "X"
+
+    error = assert_raises(ArgumentError) { TermBasedRate.new(quote: @quote) }
+    assert_match(/smoking status/i, error.message)
+  end
 end
