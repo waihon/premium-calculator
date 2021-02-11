@@ -17,6 +17,16 @@ class PremiumCalculatorTest < Minitest::Test
       plan_code: "T15",
       coverage_terms: 15
     )
+
+    @age_based_quote = Quote.new(
+      gender: "F",
+      date_of_birth: Date.parse("2000-01-01"),
+      smoking_status: "N",
+      coverage_amount: 100_000,
+      effective_date: Date.parse("2021-01-01"),
+      plan_code: "WLF",
+      coverage_terms: 64
+    )
   end
 
   def teardown
@@ -89,6 +99,12 @@ class PremiumCalculatorTest < Minitest::Test
 
     error = assert_raises(ArgumentError) { PremiumCalculator.new(quote: @quote) }
     assert_match(/gender/i, error.message)
+  end
+
+  def test_age_based_premium_female_non_smoker
+    calculator = PremiumCalculator.new(quote: @age_based_quote)
+    expected = 2036
+    assert_equal(expected, calculator.premium_amount)
   end
 end
 
