@@ -702,4 +702,11 @@ class TermBasedRateTest < Minitest::Test
     error = assert_raises(ArgumentError) { TermBasedRate.new(quote: @quote) }
     assert_match(/smoking status/i, error.message)
   end
+
+  def test_rate_unknown_gender
+    @quote.gender = "X"
+
+    error = assert_raises(ArgumentError) { TermBasedRate.new(quote: @quote) }
+    assert_match(/gender/i, error.message)
+  end
 end
