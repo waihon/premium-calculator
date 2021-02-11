@@ -544,3 +544,23 @@ class TermBasedRateTest < Minitest::Test
     assert_match(/plan code/i, error.message)
   end
 end
+
+class AgeBasedRateTest < Minitest::Test
+  def setup
+    @quote = Quote.new(
+      gender: "F",
+      date_of_birth: Date.parse("2000-01-01"),
+      smoking_status: "N",
+      plan_code: "WLF",
+      effective_date: Date.parse("2021-01-01"),
+      coverage_amount: 100_000,
+      coverage_terms: 64
+    )
+  end
+
+  def test_rate_female_non_smoker
+    age_based_rate = AgeBasedRate.new(quote: @quote)
+    expected = 2036
+    assert_equal(expected, age_based_rate.rate)
+  end
+end
