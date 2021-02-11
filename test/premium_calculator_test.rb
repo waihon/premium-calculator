@@ -571,4 +571,12 @@ class AgeBasedRateTest < Minitest::Test
     expected = 2069
     assert_equal(expected, age_based_rate.rate)
   end
+
+  def test_rate_male_non_smoker
+    @quote.gender = "M"
+
+    age_based_rate = AgeBasedRate.new(quote: @quote)
+    expected = 2413
+    assert_equal(expected, age_based_rate.rate)
+  end
 end
