@@ -651,4 +651,64 @@ class TermBasedRateTest < Minitest::Test
     expected = 80
     assert_equal(expected, term_based_rate.rate)
   end
+
+  def test_rate_female_smoker
+    quote = Quote.new(
+      gender: "F",
+      date_of_birth: Date.parse("2003-01-01"),
+      smoking_status: "S",
+      plan_code: "T15",
+      effective_date: Date.parse("2021-01-01"),
+      coverage_amount: 100_000,
+      coverage_terms: 15
+    )
+    term_based_rate = TermBasedRate.new(quote: quote)
+    expected = 107
+    assert_equal(expected, term_based_rate.rate)
+  end
+
+  def test_rate_male_non_smoker
+    quote = Quote.new(
+      gender: "M",
+      date_of_birth: Date.parse("2003-01-01"),
+      smoking_status: "N",
+      plan_code: "T15",
+      effective_date: Date.parse("2021-01-01"),
+      coverage_amount: 100_000,
+      coverage_terms: 15
+    )
+    term_based_rate = TermBasedRate.new(quote: quote)
+    expected = 108
+    assert_equal(expected, term_based_rate.rate)
+  end
+
+  def test_rate_male_smoker
+    quote = Quote.new(
+      gender: "M",
+      date_of_birth: Date.parse("2003-01-01"),
+      smoking_status: "S",
+      plan_code: "T15",
+      effective_date: Date.parse("2021-01-01"),
+      coverage_amount: 100_000,
+      coverage_terms: 15
+    )
+    term_based_rate = TermBasedRate.new(quote: quote)
+    expected = 153
+    assert_equal(expected, term_based_rate.rate)
+  end
+
+  def test_rate_female_non_smoker_higher_age
+    quote = Quote.new(
+      gender: "F",
+      date_of_birth: Date.parse("1961-01-01"),
+      smoking_status: "N",
+      plan_code: "T15",
+      effective_date: Date.parse("2021-01-01"),
+      coverage_amount: 100_000,
+      coverage_terms: 15
+    )
+    term_based_rate = TermBasedRate.new(quote: quote)
+    expected = 934
+    assert_equal(expected, term_based_rate.rate)
+  end
 end
