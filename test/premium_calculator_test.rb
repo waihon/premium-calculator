@@ -723,4 +723,11 @@ class TermBasedRateTest < Minitest::Test
     expected = 100_000.00
     assert_equal(expected, term_based_rate.divisor)
   end
+
+  def test_divisor_invalid_plan
+    @quote.plan_code = "XXX"
+
+    error = assert_raises(ArgumentError) { TermBasedRate.new(quote: @quote) }
+    assert_match(/plan code/i, error.message)
+  end
 end
