@@ -620,4 +620,10 @@ class AgeBasedRateTest < Minitest::Test
     error = assert_raises(ArgumentError) { AgeBasedRate.new(quote: @quote) }
     assert_match(/gender/i, error.message)
   end
+
+  def test_divisor_plan_wlf
+    age_based_rate = AgeBasedRate.new(quote: @quote)
+    expected = 100_000.00
+    assert_equal(expected, age_based_rate.divisor)
+  end
 end
