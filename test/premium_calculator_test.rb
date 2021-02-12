@@ -139,6 +139,14 @@ class PremiumCalculatorTest < Minitest::Test
     expected = 3054
     assert_equal(expected, calculator.premium_amount)
   end
+
+  def test_age_based_premium_earlier_date_of_birth
+    @age_based_quote.date_of_birth = Date.parse("1961-01-01")
+
+    calculator = PremiumCalculator.new(quote: @age_based_quote)
+    expected = 7847
+    assert_equal(expected, calculator.premium_amount)
+  end  
 end
 
 class QuoteTest < Minitest::Test
