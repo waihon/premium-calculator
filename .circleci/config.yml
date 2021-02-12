@@ -35,11 +35,11 @@ jobs:
       - run:
           name: Run tests
           command: |
-            mkdir /tmp/test-results
             bundle exec rake test
+          when: always
       # Collect reports
       - store_test_results:
-          path: /tmp/test-results
+          path: test/reports
       - store_artifacts:
-          path: /tmp/test-results
+          path: test/reports 
           destination: test-results
