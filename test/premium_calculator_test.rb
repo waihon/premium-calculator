@@ -131,6 +131,14 @@ class PremiumCalculatorTest < Minitest::Test
     expected = 2501
     assert_equal(expected, calculator.premium_amount)
   end
+
+  def test_age_based_premium_higher_coverage_amount
+    @age_based_quote.coverage_amount = 150_000
+
+    calculator = PremiumCalculator.new(quote: @age_based_quote)
+    expected = 3054
+    assert_equal(expected, calculator.premium_amount)
+  end
 end
 
 class QuoteTest < Minitest::Test
