@@ -34,8 +34,8 @@ jobs:
           key: v1-dependencies-{{ checksum "Gemfile.lock" }}
       - run:
           name: Run tests
-          mkdir test/reports
           command: |
+            mkdir test/reports
             bundle exec rake test
           when: always
       # Collect reports
