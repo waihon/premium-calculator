@@ -147,6 +147,15 @@ class PremiumCalculatorTest < Minitest::Test
     expected = 7847
     assert_equal(expected, calculator.premium_amount)
   end  
+
+  def test_age_based_premium_female_non_smoker_unfound_age
+    ["2006-01-01", "1960-01-01"].each do |date|
+      @age_based_quote.date_of_birth = Date.parse(date)
+
+      calculator = PremiumCalculator.new(quote: @age_based_quote)
+      assert_nil(calculator.premium_amount)
+    end
+  end
 end
 
 class QuoteTest < Minitest::Test
