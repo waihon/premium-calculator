@@ -11,3 +11,5 @@ gem "activemodel", "~> 6.1"
 gem "irb", "~> 1.3"
 
 gem "minitest-ci", "~> 3.4"
+
+gem "rake", "~> 13.0"
