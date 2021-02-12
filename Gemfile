@@ -9,3 +9,5 @@ git_source(:github) {|repo_name| "https://github.com/#{repo_name}" }
 gem "activemodel", "~> 6.1"
 
 gem "irb", "~> 1.3"
+
+gem "minitest-ci", "~> 3.4"
