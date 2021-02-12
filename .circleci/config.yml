@@ -36,7 +36,7 @@ jobs:
           name: Run tests
           command: |
             mkdir /tmp/test-results
-            bundle exec run ruby test/premium_calculator_test.rb
+            bundle exec ruby test/premium_calculator_test.rb
       # Collect reports
       - store_test_results:
           path: /tmp/test-results
