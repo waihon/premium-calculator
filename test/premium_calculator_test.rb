@@ -156,6 +156,13 @@ class PremiumCalculatorTest < Minitest::Test
       assert_nil(calculator.premium_amount)
     end
   end
+
+  def test_age_based_premium_female_unknown_smoking_status
+    @age_based_quote.smoking_status = "X"
+
+    error = assert_raises(ArgumentError) { PremiumCalculator.new(quote: @age_based_quote) }
+    assert_match(/smoking status/i, error.message)
+  end
 end
 
 class QuoteTest < Minitest::Test
