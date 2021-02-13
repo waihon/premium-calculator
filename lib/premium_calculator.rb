@@ -104,10 +104,20 @@ end
 
 class LifePremiumRate
   def self.for(quote:)
-    [TermBasedRate, AgeBasedRate, LifePremiumRate].find do |candidate|
+    registry.find do |candidate|
       candidate.handles?(plan_code: quote.plan_code)
     end.new(quote: quote)
   end
+
+  def self.registry
+    @registry ||= []
+  end
+
+  def self.register(candidate:)
+    registry.prepend(candidate)
+  end
+
+  LifePremiumRate.register(candidate: self)
 
   def self.handles?(plan_code:)
     true
@@ -133,6 +143,8 @@ class LifePremiumRate
 end
 
 class TermBasedRate < LifePremiumRate
+  LifePremiumRate.register(candidate: self)
+
   def self.handles?(plan_code:)
     %w(T15).include?(plan_code) 
   end
@@ -162,6 +174,8 @@ class TermBasedRate < LifePremiumRate
 end
 
 class AgeBasedRate < LifePremiumRate
+  LifePremiumRate.register(candidate: self)
+
   def self.handles?(plan_code:)
     %w(WLF).include?(plan_code) 
   end
