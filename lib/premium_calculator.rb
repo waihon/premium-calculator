@@ -104,9 +104,9 @@ end
 
 class LifePremiumRate
   def self.for(quote:)
-    { "T15" => TermBasedRate,
-      "WLF" => AgeBasedRate }.
-      fetch(quote.plan_code, LifePremiumRate).new(quote: quote)
+    [TermBasedRate, AgeBasedRate, LifePremiumRate].find do |candidate|
+      candidate.handles?(plan_code: quote.plan_code)
+    end.new(quote: quote)
   end
 
   def self.handles?(plan_code:)
