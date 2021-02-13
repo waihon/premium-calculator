@@ -190,7 +190,7 @@ class PremiumRateNotFoundError < StandardError
 end
 
 class PremiumRates
-  attr_reader :plan_code, :rates
+  attr_reader :plan_code
 
   def initialize(plan_code:)
     @plan_code = plan_code
