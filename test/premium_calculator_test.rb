@@ -237,7 +237,7 @@ class QuoteTest < Minitest::Test
     end
   end
 
-  def test_smoking_status_is_invalid
+  def test_smoking_status_is_valid
     quote = Quote.new
     %w(N S).each do |smoking_status|
       quote.smoking_status = smoking_status
