@@ -1,2 +1,2 @@
 language = "bash"
-run = "bundle exec ruby test/premium_calculator_test.rb"
+run = "bundle exec rake test"
