@@ -104,9 +104,13 @@ end
 
 class LifePremiumRate
   def self.for(quote:)
-    Hash.new(LifePremiumRate).merge(
-      "T15" => TermBasedRate,
-      "WLF" => AgeBasedRate)[quote.plan_code].new(quote: quote)
+    { "T15" => TermBasedRate,
+      "WLF" => AgeBasedRate }.
+      fetch(quote.plan_code, LifePremiumRate).new(quote: quote)
+  end
+
+  def self.handles?(plan_code:)
+    true
   end
 
   def initialize(quote:)
@@ -129,6 +133,10 @@ class LifePremiumRate
 end
 
 class TermBasedRate < LifePremiumRate
+  def self.handles?(plan_code:)
+    %w(T15).include?(plan_code) 
+  end
+
   def rate 
     rates = @premium_rates.rates
     coverage_terms = @quote.coverage_terms
@@ -154,6 +162,10 @@ class TermBasedRate < LifePremiumRate
 end
 
 class AgeBasedRate < LifePremiumRate
+  def self.handles?(plan_code:)
+    %w(WLF).include?(plan_code) 
+  end
+
   def rate
     rates = @premium_rates.rates
     gender = @quote.gender
