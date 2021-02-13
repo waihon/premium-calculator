@@ -165,7 +165,7 @@ class PremiumCalculatorTest < Minitest::Test
     assert_match(/smoking status/i, error.message)
   end
 
-  def test_premium_unknown_gender
+  def test_age_based_premium_unknown_gender
     @quote.gender = "X"
 
     error = assert_raises(ArgumentError) { PremiumCalculator.new(quote: @quote) }
