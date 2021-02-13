@@ -110,14 +110,16 @@ class LifePremiumRate
   end
 
   def self.registry
-    @registry ||= []
+    @registry ||= [LifePremiumRate]
   end
 
   def self.register(candidate:)
     registry.prepend(candidate)
   end
 
-  LifePremiumRate.register(candidate: self)
+  def self.inherited(candidate)
+    register(candidate: candidate)
+  end
 
   def self.handles?(plan_code:)
     true
@@ -143,8 +145,6 @@ class LifePremiumRate
 end
 
 class TermBasedRate < LifePremiumRate
-  LifePremiumRate.register(candidate: self)
-
   def self.handles?(plan_code:)
     %w(T15).include?(plan_code) 
   end
@@ -174,8 +174,6 @@ class TermBasedRate < LifePremiumRate
 end
 
 class AgeBasedRate < LifePremiumRate
-  LifePremiumRate.register(candidate: self)
-
   def self.handles?(plan_code:)
     %w(WLF).include?(plan_code) 
   end
