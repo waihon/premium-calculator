@@ -266,8 +266,7 @@ class QuoteTest < Minitest::Test
   def test_coverage_amount_is_more_than_maximum
     quote = Quote.new
     %w(10_000_000.01 50_000_000 100_000_000).each do |amount|
-      coverage_amount = amount.to_f
-      quote.coverage_amount = amount
+      quote.coverage_amount = amount.to_f
       quote.valid?
       assert_equal(true, quote.errors[:coverage_amount].any?)
       assert_match(/must be less than or equal to/, quote.errors[:coverage_amount].first)
