@@ -104,14 +104,9 @@ end
 
 class LifePremiumRate
   def self.for(quote:)
-    case quote.plan_code
-    when "T15"
-      TermBasedRate
-    when "WLF"
-      AgeBasedRate
-    else
-      LifePremiumRate
-    end.new(quote: quote)
+    Hash.new(LifePremiumRate).merge(
+      "T15" => TermBasedRate,
+      "WLF" => AgeBasedRate)[quote.plan_code].new(quote: quote)
   end
 
   def initialize(quote:)
