@@ -195,7 +195,7 @@ class PremiumRates
   def initialize(plan_code:)
     @plan_code = plan_code
     filename = "config/#{@plan_code}/premium_rates.yaml"
-    @premium_rates = File.exists?(filename) ? YAML.load(File.read(filename)) : nil
+    @premium_rates = File.exist?(filename) ? YAML.load(File.read(filename)) : nil
   end
 
   def rates
@@ -216,7 +216,7 @@ class ModalFactor
 
   def modal_factor
     filename = "config/modal_factor.yaml"
-    return nil unless File.exists?(filename)
+    return nil unless File.exist?(filename)
     @modal_factor ||= YAML.load(File.read(filename))
   end
 
