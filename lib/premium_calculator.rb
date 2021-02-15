@@ -246,6 +246,11 @@ class PremiumRates
 end
 
 class ModalFactor
+  YEARLY = "Y".freeze
+  HALF_YEARLY = "HY".freeze
+  QUARTERLY = "Q".freeze
+  MONTHLY = "M".freeze
+
   attr_reader :plan_code
 
   def initialize(plan_code:)
@@ -259,18 +264,18 @@ class ModalFactor
   end
 
   def yearly
-    modal_factor[plan_code]["Y"]
+    modal_factor[plan_code][YEARLY]
   end
 
   def half_yearly
-    modal_factor[plan_code]["HY"] 
+    modal_factor[plan_code][HALF_YEARLY] 
   end
 
   def quarterly
-    modal_factor[plan_code]["Q"] 
+    modal_factor[plan_code][QUARTERLY]
   end
 
   def monthly
-    modal_factor[plan_code]["M"] 
+    modal_factor[plan_code][MONTHLY] 
   end
 end
