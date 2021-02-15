@@ -265,3 +265,8 @@ class Smoking
   NON_SMOKER = "N".freeze
   SMOKER = "S".freeze
 end
+
+class LifeInsurancePlan
+  T15 = "T15".freeze
+  WLF = "WLF".freeze
+end
