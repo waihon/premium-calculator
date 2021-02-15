@@ -15,7 +15,7 @@ class PremiumCalculatorTest < Minitest::Test
       smoking_status: Smoking::NON_SMOKER,
       coverage_amount: 100_000,
       effective_date: Date.parse("2021-01-01"),
-      plan_code: "T15",
+      plan_code: LifeInsurancePlan::T15,
       coverage_terms: 15
     )
 
@@ -25,7 +25,7 @@ class PremiumCalculatorTest < Minitest::Test
       smoking_status: Smoking::NON_SMOKER,
       coverage_amount: 100_000,
       effective_date: Date.parse("2021-01-01"),
-      plan_code: "WLF",
+      plan_code: LifeInsurancePlan::WLF,
       coverage_terms: 64
     )
   end
@@ -497,7 +497,7 @@ end
 
 class PremiumRatesTest < Minitest::Test
   def test_premXum_rates_valid_plan
-    rates = PremiumRates.new(plan_code: "T15").rates
+    rates = PremiumRates.new(plan_code: LifeInsurancePlan::T15).rates
     refute_nil(rates)
   end
 
@@ -509,22 +509,22 @@ end
 
 class ModalFactorTest < Minitest::Test
   def test_modal_factor_t15_yearly
-    modal_factor = ModalFactor.new(plan_code: "T15")
+    modal_factor = ModalFactor.new(plan_code: LifeInsurancePlan::T15)
     assert_equal(1.0000, modal_factor.yearly)
   end
 
   def test_modal_factor_t15_half_yearly
-    modal_factor = ModalFactor.new(plan_code: "T15")
+    modal_factor = ModalFactor.new(plan_code: LifeInsurancePlan::T15)
     assert_equal(0.5065, modal_factor.half_yearly)
   end
 
   def test_modal_factor_t15_quarterly
-    modal_factor = ModalFactor.new(plan_code: "T15")
+    modal_factor = ModalFactor.new(plan_code: LifeInsurancePlan::T15)
     assert_equal(0.2565, modal_factor.quarterly)
   end
 
   def test_modal_factor_t15_monthly
-    modal_factor = ModalFactor.new(plan_code: "T15")
+    modal_factor = ModalFactor.new(plan_code: LifeInsurancePlan::T15)
     assert_equal(0.0865, modal_factor.monthly)
   end
 end
@@ -535,7 +535,7 @@ class TermBasedRateTest < Minitest::Test
       gender: Gender::FEMALE,
       date_of_birth: Date.parse("2003-01-01"),
       smoking_status: Smoking::NON_SMOKER,
-      plan_code: "T15",
+      plan_code: LifeInsurancePlan::T15,
       effective_date: Date.parse("2021-01-01"),
       coverage_amount: 100_000,
       coverage_terms: 15
@@ -631,7 +631,7 @@ class AgeBasedRateTest < Minitest::Test
       gender: Gender::FEMALE,
       date_of_birth: Date.parse("2000-01-01"),
       smoking_status: Smoking::NON_SMOKER,
-      plan_code: "WLF",
+      plan_code: LifeInsurancePlan::WLF,
       effective_date: Date.parse("2021-01-01"),
       coverage_amount: 100_000,
       coverage_terms: 64
