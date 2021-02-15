@@ -10,7 +10,7 @@ class PremiumCalculatorTest < Minitest::Test
     $stdout.reopen File.new('/dev/null', 'w')
 
     @quote = Quote.new(
-      gender: "F",
+      gender: Gender::FEMALE,
       date_of_birth: Date.parse("2003-01-01"),
       smoking_status: "N",
       coverage_amount: 100_000,
@@ -20,7 +20,7 @@ class PremiumCalculatorTest < Minitest::Test
     )
 
     @age_based_quote = Quote.new(
-      gender: "F",
+      gender: Gender::FEMALE,
       date_of_birth: Date.parse("2000-01-01"),
       smoking_status: "N",
       coverage_amount: 100_000,
@@ -49,7 +49,7 @@ class PremiumCalculatorTest < Minitest::Test
   end
 
   def test_premium_male_non_smoker
-    @quote.gender = "M"
+    @quote.gender = Gender::MALE
 
     calculator = PremiumCalculator.new(quote: @quote)
     expected = 108
@@ -57,7 +57,7 @@ class PremiumCalculatorTest < Minitest::Test
   end
 
   def test_premium_male_smoker
-    @quote.gender = "M"
+    @quote.gender = Gender::MALE
     @quote.smoking_status = "S"
 
     calculator = PremiumCalculator.new(quote: @quote)
@@ -117,7 +117,7 @@ class PremiumCalculatorTest < Minitest::Test
   end
 
   def test_age_based_premium_male_non_smoker
-    @age_based_quote.gender = "M"
+    @age_based_quote.gender = Gender::MALE
 
     calculator = PremiumCalculator.new(quote: @age_based_quote)
     expected = 2413
@@ -125,7 +125,7 @@ class PremiumCalculatorTest < Minitest::Test
   end
 
   def test_age_based_premium_male_smoker
-    @age_based_quote.gender = "M"
+    @age_based_quote.gender = Gender::MALE
     @age_based_quote.smoking_status = "S"
 
     calculator = PremiumCalculator.new(quote: @age_based_quote)
@@ -532,7 +532,7 @@ end
 class TermBasedRateTest < Minitest::Test
   def setup
     @quote = Quote.new(
-      gender: "F",
+      gender: Gender::FEMALE,
       date_of_birth: Date.parse("2003-01-01"),
       smoking_status: "N",
       plan_code: "T15",
@@ -557,7 +557,7 @@ class TermBasedRateTest < Minitest::Test
   end
 
   def test_rate_male_non_smoker
-    @quote.gender = "M"
+    @quote.gender = Gender::MALE
 
     term_based_rate = TermBasedRate.new(quote: @quote)
     expected = 108
@@ -565,7 +565,7 @@ class TermBasedRateTest < Minitest::Test
   end
 
   def test_rate_male_smoker
-    @quote.gender = "M"
+    @quote.gender = Gender::MALE
     @quote.smoking_status = "S"
 
     term_based_rate = TermBasedRate.new(quote: @quote)
@@ -628,7 +628,7 @@ end
 class AgeBasedRateTest < Minitest::Test
   def setup
     @quote = Quote.new(
-      gender: "F",
+      gender: Gender::FEMALE,
       date_of_birth: Date.parse("2000-01-01"),
       smoking_status: "N",
       plan_code: "WLF",
@@ -653,7 +653,7 @@ class AgeBasedRateTest < Minitest::Test
   end
 
   def test_rate_male_non_smoker
-    @quote.gender = "M"
+    @quote.gender = Gender::MALE
 
     age_based_rate = AgeBasedRate.new(quote: @quote)
     expected = 2413
@@ -661,7 +661,7 @@ class AgeBasedRateTest < Minitest::Test
   end
 
   def test_rate_male_smoker
-    @quote.gender = "M"
+    @quote.gender = Gender::MALE
     @quote.smoking_status = "S"
 
     age_based_rate = AgeBasedRate.new(quote: @quote)
