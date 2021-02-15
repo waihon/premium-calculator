@@ -1,6 +1,25 @@
 require 'yaml'
 require 'active_model'
 
+class LifeInsurancePlan
+  T15 = "T15".freeze
+  WLF = "WLF".freeze
+
+  def self.active_plans
+    [T15, WLF].freeze
+  end
+end
+
+class Gender
+  MALE = "M".freeze
+  FEMALE = "F".freeze
+end
+
+class Smoking
+  NON_SMOKER = "N".freeze
+  SMOKER = "S".freeze
+end
+
 class PremiumCalculator
   attr_reader :quote, :age, :premium_rate
 
@@ -253,24 +272,5 @@ class ModalFactor
 
   def monthly
     modal_factor[plan_code]["M"] 
-  end
-end
-
-class Gender
-  MALE = "M".freeze
-  FEMALE = "F".freeze
-end
-
-class Smoking
-  NON_SMOKER = "N".freeze
-  SMOKER = "S".freeze
-end
-
-class LifeInsurancePlan
-  T15 = "T15".freeze
-  WLF = "WLF".freeze
-
-  def self.active_plans
-    [T15, WLF].freeze
   end
 end
