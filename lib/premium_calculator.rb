@@ -98,7 +98,7 @@ class Quote
   validates :date_of_birth, presence: true
   validates :date_of_birth, date: true
   validates :smoking_status, presence: true
-  validates :smoking_status, inclusion: { in: %w(N S) }
+  validates :smoking_status, inclusion: { in: [Smoking::NON_SMOKER, Smoking::SMOKER] }
   validates :coverage_amount, presence: true
   validates :coverage_amount, numericality: { greater_than_or_equal_to: 10_000,
                                               less_than_or_equal_to: 10_000_000 }
