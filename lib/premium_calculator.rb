@@ -58,9 +58,7 @@ class Age
   end
 
   def age
-    age = now.year - date_of_birth.year
-    age -= 1 unless (birthday? || birthday_passed?)
-    age
+    raise "Called abstract method: age"
   end
 end
 
