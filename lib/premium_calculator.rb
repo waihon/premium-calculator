@@ -255,3 +255,8 @@ class ModalFactor
     modal_factor[plan_code]["M"] 
   end
 end
+
+class Gender
+  MALE = "M".freeze
+  FEMALE = "F".freeze
+end
