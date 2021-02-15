@@ -94,7 +94,7 @@ class Quote
   attr_accessor :plan_code, :coverage_terms
 
   validates :gender, presence: true
-  validates :gender, inclusion: { in: %w(F M) }
+  validates :gender, inclusion: { in: [Gender::FEMALE, Gender::MALE] }
   validates :date_of_birth, presence: true
   validates :date_of_birth, date: true
   validates :smoking_status, presence: true
