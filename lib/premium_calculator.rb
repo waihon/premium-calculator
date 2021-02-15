@@ -64,6 +64,14 @@ class Age
   end
 end
 
+class AgeLastBirthday < Age
+  def age
+    age = now.year - date_of_birth.year
+    age -= 1 unless (birthday? || birthday_passed?)
+    age
+  end
+end
+
 class AgeNextBirthday < Age
   def age
     super + 1
