@@ -62,9 +62,11 @@ class Age
     age -= 1 unless (birthday? || birthday_passed?)
     age
   end
+end
 
-  def next
-    age + 1
+class AgeNextBirthday < Age
+  def age
+    super + 1
   end
 end
 
