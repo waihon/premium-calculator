@@ -57,14 +57,14 @@ class Age
     (now.month == date_of_birth.month && now.day > date_of_birth.day)
   end
 
-  def current
-    current_age = now.year - date_of_birth.year
-    current_age -= 1 unless (birthday? || birthday_passed?)
-    current_age
+  def age
+    age = now.year - date_of_birth.year
+    age -= 1 unless (birthday? || birthday_passed?)
+    age
   end
 
   def next
-    current + 1
+    age + 1
   end
 end
 
@@ -173,7 +173,7 @@ class TermBasedRate < LifePremiumRate
     coverage_terms = @quote.coverage_terms
     gender = @quote.gender
     smoking_status = @quote.smoking_status
-    age = @age.current
+    age = @age.age
 
     unless rates[coverage_terms]
       raise PremiumRateNotFoundError.new("premium rate not found", :coverage_terms)
@@ -201,7 +201,7 @@ class AgeBasedRate < LifePremiumRate
     rates = @premium_rates.rates
     gender = @quote.gender
     smoking_status = @quote.smoking_status
-    age = @age.current
+    age = @age.age
 
     unless rates[gender]
       raise PremiumRateNotFoundError.new("premium rate not found", :gender)
