@@ -132,7 +132,7 @@ class Quote
 end
 
 class LifePremiumRate
-  def self.for(quote:, age_calculator: Age, premium_rates: PremiumRates)
+  def self.for(quote:, age_calculator: AgeLastBirthday, premium_rates: PremiumRates)
     registry.find do |candidate|
       candidate.handles?(plan_code: quote.plan_code)
     end.new(quote: quote, age_calculator: age_calculator, premium_rates: premium_rates)
@@ -154,7 +154,7 @@ class LifePremiumRate
     true
   end
 
-  def initialize(quote:, age_calculator: Age, premium_rates: PremiumRates)
+  def initialize(quote:, age_calculator: AgeLastBirthday, premium_rates: PremiumRates)
     unless quote.valid?
       raise ArgumentError, "invalid quote object: #{quote.errors.full_messages[0]}"
     end
