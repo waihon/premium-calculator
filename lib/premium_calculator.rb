@@ -260,3 +260,8 @@ class Gender
   MALE = "M".freeze
   FEMALE = "F".freeze
 end
+
+class Smoking
+  NON_SMOKER = "N".freeze
+  SMOKER = "S".freeze
+end

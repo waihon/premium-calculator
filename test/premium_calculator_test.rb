@@ -12,7 +12,7 @@ class PremiumCalculatorTest < Minitest::Test
     @quote = Quote.new(
       gender: Gender::FEMALE,
       date_of_birth: Date.parse("2003-01-01"),
-      smoking_status: "N",
+      smoking_status: Smoking::NON_SMOKER,
       coverage_amount: 100_000,
       effective_date: Date.parse("2021-01-01"),
       plan_code: "T15",
@@ -22,7 +22,7 @@ class PremiumCalculatorTest < Minitest::Test
     @age_based_quote = Quote.new(
       gender: Gender::FEMALE,
       date_of_birth: Date.parse("2000-01-01"),
-      smoking_status: "N",
+      smoking_status: Smoking::NON_SMOKER,
       coverage_amount: 100_000,
       effective_date: Date.parse("2021-01-01"),
       plan_code: "WLF",
@@ -41,7 +41,7 @@ class PremiumCalculatorTest < Minitest::Test
   end
 
   def test_premium_female_smoker
-    @quote.smoking_status = "S"
+    @quote.smoking_status = Smoking::SMOKER
 
     calculator = PremiumCalculator.new(quote: @quote)
     expected = 107
@@ -58,7 +58,7 @@ class PremiumCalculatorTest < Minitest::Test
 
   def test_premium_male_smoker
     @quote.gender = Gender::MALE
-    @quote.smoking_status = "S"
+    @quote.smoking_status = Smoking::SMOKER
 
     calculator = PremiumCalculator.new(quote: @quote)
     expected = 153
@@ -109,7 +109,7 @@ class PremiumCalculatorTest < Minitest::Test
   end
 
   def test_age_based_premium_female_smoker
-    @age_based_quote.smoking_status = "S"
+    @age_based_quote.smoking_status = Smoking::SMOKER
 
     calculator = PremiumCalculator.new(quote: @age_based_quote)
     expected = 2069
@@ -126,7 +126,7 @@ class PremiumCalculatorTest < Minitest::Test
 
   def test_age_based_premium_male_smoker
     @age_based_quote.gender = Gender::MALE
-    @age_based_quote.smoking_status = "S"
+    @age_based_quote.smoking_status = Smoking::SMOKER
 
     calculator = PremiumCalculator.new(quote: @age_based_quote)
     expected = 2501
@@ -534,7 +534,7 @@ class TermBasedRateTest < Minitest::Test
     @quote = Quote.new(
       gender: Gender::FEMALE,
       date_of_birth: Date.parse("2003-01-01"),
-      smoking_status: "N",
+      smoking_status: Smoking::NON_SMOKER,
       plan_code: "T15",
       effective_date: Date.parse("2021-01-01"),
       coverage_amount: 100_000,
@@ -549,7 +549,7 @@ class TermBasedRateTest < Minitest::Test
   end
 
   def test_rate_female_smoker
-    @quote.smoking_status = "S"
+    @quote.smoking_status = Smoking::SMOKER
 
     term_based_rate = TermBasedRate.new(quote: @quote)
     expected = 107
@@ -566,7 +566,7 @@ class TermBasedRateTest < Minitest::Test
 
   def test_rate_male_smoker
     @quote.gender = Gender::MALE
-    @quote.smoking_status = "S"
+    @quote.smoking_status = Smoking::SMOKER
 
     term_based_rate = TermBasedRate.new(quote: @quote)
     expected = 153
@@ -630,7 +630,7 @@ class AgeBasedRateTest < Minitest::Test
     @quote = Quote.new(
       gender: Gender::FEMALE,
       date_of_birth: Date.parse("2000-01-01"),
-      smoking_status: "N",
+      smoking_status: Smoking::NON_SMOKER,
       plan_code: "WLF",
       effective_date: Date.parse("2021-01-01"),
       coverage_amount: 100_000,
@@ -645,7 +645,7 @@ class AgeBasedRateTest < Minitest::Test
   end
 
   def test_rate_female_smoker
-    @quote.smoking_status = "S"
+    @quote.smoking_status = Smoking::SMOKER
 
     age_based_rate = AgeBasedRate.new(quote: @quote)
     expected = 2069
@@ -662,7 +662,7 @@ class AgeBasedRateTest < Minitest::Test
 
   def test_rate_male_smoker
     @quote.gender = Gender::MALE
-    @quote.smoking_status = "S"
+    @quote.smoking_status = Smoking::SMOKER
 
     age_based_rate = AgeBasedRate.new(quote: @quote)
     expected = 2501
