@@ -105,7 +105,7 @@ class Quote
   validates :effective_date, presence: true
   validates :effective_date, date: true
   validates :plan_code, presence: true
-  validates :plan_code, inclusion: { in: %w(T15 WLF) }
+  validates :plan_code, inclusion: { in: LifeInsurancePlan.active_plans }
   validates :coverage_terms, presence: true
   validates :coverage_terms, numeric: true
   validates :coverage_terms, numericality: { only_integer: true }
