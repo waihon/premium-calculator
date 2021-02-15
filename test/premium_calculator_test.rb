@@ -746,4 +746,35 @@ class AgeBasedRateTest < Minitest::Test
     error = assert_raises(ArgumentError) { AgeBasedRate.new(quote: @quote) }
     assert_match(/plan code/i, error.message)
   end
+
+  def test_rate_female_non_smoker_age_next_birthday
+    age_based_rate = AgeBasedRate.new(quote: @quote, age_calculator: AgeNextBirthday)
+    expected = 2085
+    assert_equal(expected, age_based_rate.rate)
+  end
+
+  def test_rate_female_smoker_age_next_birthday
+    @quote.smoking_status = Smoking::SMOKER
+
+    age_based_rate = AgeBasedRate.new(quote: @quote, age_calculator: AgeNextBirthday)
+    expected = 2118
+    assert_equal(expected, age_based_rate.rate)
+  end
+
+  def test_rate_male_non_smoker_age_next_birthday
+    @quote.gender = Gender::MALE
+
+    age_based_rate = AgeBasedRate.new(quote: @quote, age_calculator: AgeNextBirthday)
+    expected = 2462
+    assert_equal(expected, age_based_rate.rate)
+  end
+
+  def test_rate_male_smoker_age_next_birthday
+    @quote.gender = Gender::MALE
+    @quote.smoking_status = Smoking::SMOKER
+
+    age_based_rate = AgeBasedRate.new(quote: @quote, age_calculator: AgeNextBirthday)
+    expected = 2550
+    assert_equal(expected, age_based_rate.rate)
+  end
 end
