@@ -165,7 +165,7 @@ end
 
 class TermBasedRate < LifePremiumRate
   def self.handles?(plan_code:)
-    %w(T15).include?(plan_code) 
+    [LifeInsurancePlan::T15].include?(plan_code)
   end
 
   def rate 
@@ -194,7 +194,7 @@ end
 
 class AgeBasedRate < LifePremiumRate
   def self.handles?(plan_code:)
-    %w(WLF).include?(plan_code) 
+    [LifeInsurancePlan::WLF].include?(plan_code)
   end
 
   def rate
