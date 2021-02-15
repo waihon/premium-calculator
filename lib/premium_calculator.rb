@@ -40,7 +40,7 @@ class PremiumCalculator
   end
 end
 
-class AgeCalculator
+class Age
   attr_reader :date_of_birth, :now
 
   def initialize(date_of_birth:, now: Date.today)
@@ -150,7 +150,7 @@ class LifePremiumRate
     end
 
     @quote = quote
-    @age = AgeCalculator.new(date_of_birth: quote.date_of_birth, now: quote.effective_date)
+    @age = Age.new(date_of_birth: quote.date_of_birth, now: quote.effective_date)
     @premium_rates = PremiumRates.new(plan_code: quote.plan_code)
   end
 
