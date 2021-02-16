@@ -25,7 +25,7 @@ class PremiumCalculator
 
   def initialize(quote:)
     unless quote.valid?
-      raise ArgumentError, "invalid quote object: #{quote.errors.full_messages[0]}"
+      raise ArgumentError, "invalid quote object: #{quote.first_full_message}"
     end
     @quote = quote
     @premium_rate = LifePremiumRate.for(quote: quote)
@@ -129,6 +129,10 @@ class Quote
   def persisted?
     false
   end  
+
+  def first_full_message
+    errors.full_messages[0]
+  end
 end
 
 class LifePremiumRate
@@ -156,7 +160,7 @@ class LifePremiumRate
 
   def initialize(quote:, age_calculator: AgeLastBirthday, premium_rates: PremiumRates)
     unless quote.valid?
-      raise ArgumentError, "invalid quote object: #{quote.errors.full_messages[0]}"
+      raise ArgumentError, "invalid quote object: #{quote.first_full_message}"
     end
 
     @quote = quote
