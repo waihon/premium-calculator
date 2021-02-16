@@ -378,6 +378,11 @@ class QuoteTest < Minitest::Test
       assert_match(/must be an integer/, quote.first_error_message(attr: :coverage_terms))
     end
   end
+
+  def test_persisted_is_false
+    quote = Quote.new
+    assert_equal(false, quote.persisted?)
+  end
 end
 
 class AgeTest < Minitest::Test
