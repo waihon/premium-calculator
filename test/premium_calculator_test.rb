@@ -621,15 +621,17 @@ class TermBasedRateTest < Minitest::Test
   def test_rate_female_unknown_smoking_status
     @quote.smoking_status = "X"
 
-    error = assert_raises(ArgumentError) { TermBasedRate.new(quote: @quote) }
-    assert_match(/smoking status/i, error.message)
+    term_based_rate = TermBasedRate.new(quote: @quote)
+    error = assert_raises(PremiumRateNotFoundError) { term_based_rate.rate }
+    assert_equal(:smoking_status, error.key)
   end
 
   def test_rate_unknown_gender
     @quote.gender = "X"
 
-    error = assert_raises(ArgumentError) { TermBasedRate.new(quote: @quote) }
-    assert_match(/gender/i, error.message)
+    term_based_rate = TermBasedRate.new(quote: @quote)
+    error = assert_raises(PremiumRateNotFoundError) { term_based_rate.rate }
+    assert_equal(:gender, error.key)
   end
 
   def test_rate_unfound_coverage_terms
@@ -649,8 +651,8 @@ class TermBasedRateTest < Minitest::Test
   def test_divisor_invalid_plan
     @quote.plan_code = "XXX"
 
-    error = assert_raises(ArgumentError) { TermBasedRate.new(quote: @quote) }
-    assert_match(/plan code/i, error.message)
+    term_based_rate = TermBasedRate.new(quote: @quote)
+    assert_nil(term_based_rate.divisor) 
   end
 
   def test_rate_female_non_smoker_age_next_birthday
@@ -750,15 +752,17 @@ class AgeBasedRateTest < Minitest::Test
   def test_rate_female_unknown_smoking_status
     @quote.smoking_status = "X"
 
-    error = assert_raises(ArgumentError) { AgeBasedRate.new(quote: @quote) }
-    assert_match(/smoking status/i, error.message)
+    age_based_rate = AgeBasedRate.new(quote: @quote)
+    error = assert_raises(PremiumRateNotFoundError) { age_based_rate.rate }
+    assert_equal(:smoking_status, error.key)
   end
 
   def test_rate_unknown_gender
     @quote.gender = "X"
 
-    error = assert_raises(ArgumentError) { AgeBasedRate.new(quote: @quote) }
-    assert_match(/gender/i, error.message)
+    age_based_rate = AgeBasedRate.new(quote: @quote)
+    error = assert_raises(PremiumRateNotFoundError) { age_based_rate.rate }
+    assert_equal(:gender, error.key)
   end
 
   def test_divisor_plan_wlf
@@ -770,8 +774,8 @@ class AgeBasedRateTest < Minitest::Test
   def test_divisor_invalid_plan
     @quote.plan_code = "YYY"
 
-    error = assert_raises(ArgumentError) { AgeBasedRate.new(quote: @quote) }
-    assert_match(/plan code/i, error.message)
+    term_based_rate = TermBasedRate.new(quote: @quote)
+    assert_nil(term_based_rate.divisor) 
   end
 
   def test_rate_female_non_smoker_age_next_birthday

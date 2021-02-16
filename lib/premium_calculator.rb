@@ -168,7 +168,7 @@ class LifePremiumRate
 
   def initialize(quote:, age_calculator: AgeLastBirthday, premium_rates: PremiumRates)
     unless quote.valid?
-      raise ArgumentError, "invalid quote object: #{quote.first_full_message}"
+      #raise ArgumentError, "invalid quote object: #{quote.first_full_message}"
     end
 
     @quote = quote
