@@ -133,6 +133,10 @@ class Quote
   def first_full_message
     errors.full_messages[0]
   end
+
+  def first_error_message(attr:)
+    errors[attr].first
+  end
 end
 
 class LifePremiumRate
