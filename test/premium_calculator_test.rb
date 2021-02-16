@@ -551,6 +551,13 @@ class ModalFactorTest < Minitest::Test
   end
 end
 
+class LifePremiumRateTest < Minitest::Test
+  def test_premium_rate_factory
+    plan_code = "XXX".freeze
+    assert_equal(true, LifePremiumRate.handles?(plan_code: plan_code))
+  end
+end
+
 class TermBasedRateTest < Minitest::Test
   def setup
     @quote = Quote.new(
