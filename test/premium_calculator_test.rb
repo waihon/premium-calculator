@@ -179,7 +179,7 @@ class QuoteTest < Minitest::Test
     ["", nil].each do |gender|
       quote.gender = gender
       assert_equal(false, quote.valid?)
-      assert_equal(true, quote.errors[:gender].any?)
+      assert_equal(true, quote.error?(attr: :gender))
       assert_match(/can't be blank/, quote.first_error_message(attr: :gender))
     end
   end
@@ -189,7 +189,7 @@ class QuoteTest < Minitest::Test
     %w(F M).each do |gender|
       quote.gender = gender
       quote.valid?
-      assert_equal(false, quote.errors[:gender].any?)
+      assert_equal(false, quote.error?(attr: :gender))
     end
   end
 
@@ -198,7 +198,7 @@ class QuoteTest < Minitest::Test
     %w(f m U u Female Male Unknown).each do |gender|
       quote.gender = gender
       quote.valid?
-      assert_equal(true, quote.errors[:gender].any?)
+      assert_equal(true, quote.error?(attr: :gender))
       assert_match(/is not included in the list/, quote.first_error_message(attr: :gender))
     end
   end
@@ -206,21 +206,21 @@ class QuoteTest < Minitest::Test
   def test_date_of_birth_is_required
     quote = Quote.new(date_of_birth: nil)
     quote.valid?
-    assert_equal(true, quote.errors[:date_of_birth].any?)
+    assert_equal(true, quote.error?(attr: :date_of_birth))
     assert_match(/can't be blank/, quote.first_error_message(attr: :date_of_birth))
   end
 
   def test_date_of_birth_is_invalid
     quote = Quote.new(date_of_birth: 19900816) 
     quote.valid?
-    assert_equal(true, quote.errors[:date_of_birth].any?)
+    assert_equal(true, quote.error?(attr: :date_of_birth))
     assert_match(/is an invalid date/, quote.first_error_message(attr: :date_of_birth))
   end
 
   def test_date_of_birth_is_valid
     quote = Quote.new(date_of_birth: Date.parse("1990-08-16"))
     quote.valid?
-    assert_equal(false, quote.errors[:date_of_birth].any?)
+    assert_equal(false, quote.error?(attr: :date_of_birth))
   end
 
   def test_smoking_status_is_required
@@ -228,7 +228,7 @@ class QuoteTest < Minitest::Test
     ["", nil].each do |smoking_status|
       quote.smoking_status = smoking_status
       quote.valid?
-      assert_equal(true, quote.errors[:smoking_status].any?)
+      assert_equal(true, quote.error?(attr: :smoking_status))
       assert_match(/can't be blank/, quote.first_error_message(attr: :smoking_status))
     end
   end
@@ -238,7 +238,7 @@ class QuoteTest < Minitest::Test
     %w(X Y No Yes Non-Smoker Smoker).each do |smoking_status|
       quote.smoking_status = smoking_status
       quote.valid?
-      assert_equal(true, quote.errors[:smoking_status].any?)
+      assert_equal(true, quote.error?(attr: :smoking_status))
       assert_match(/is not included in the list/, quote.first_error_message(attr: :smoking_status))
     end
   end
@@ -248,14 +248,14 @@ class QuoteTest < Minitest::Test
     %w(N S).each do |smoking_status|
       quote.smoking_status = smoking_status
       quote.valid?
-      assert_equal(false, quote.errors[:smoking_status].any?)
+      assert_equal(false, quote.error?(attr: :smoking_status))
     end
   end
 
   def test_coverage_amount_is_required
     quote = Quote.new(coverage_amount: nil)
     quote.valid?
-    assert_equal(true, quote.errors[:coverage_amount].any?)
+    assert_equal(true, quote.error?(attr: :coverage_amount))
   end
 
   def test_coverage_amount_is_less_than_minimum
@@ -264,7 +264,7 @@ class QuoteTest < Minitest::Test
       coverage_amount = amount.to_f
       quote.coverage_amount = coverage_amount
       quote.valid?
-      assert_equal(true, quote.errors[:coverage_amount].any?)
+      assert_equal(true, quote.error?(attr: :coverage_amount))
       assert_match(/must be greater than or equal to/, quote.first_error_message(attr: :coverage_amount))
     end
   end
@@ -274,7 +274,7 @@ class QuoteTest < Minitest::Test
     %w(10_000_000.01 50_000_000 100_000_000).each do |amount|
       quote.coverage_amount = amount.to_f
       quote.valid?
-      assert_equal(true, quote.errors[:coverage_amount].any?)
+      assert_equal(true, quote.error?(attr: :coverage_amount))
       assert_match(/must be less than or equal to/, quote.first_error_message(attr: :coverage_amount))
     end
   end  
@@ -282,7 +282,7 @@ class QuoteTest < Minitest::Test
   def test_effective_date_is_required
     quote = Quote.new(effective_date: nil)
     quote.valid?
-    assert_equal(true, quote.errors[:effective_date].any?)
+    assert_equal(true, quote.error?(attr: :effective_date))
     assert_match(/can't be blank/, quote.first_error_message(attr: :effective_date))
   end
 
@@ -292,7 +292,7 @@ class QuoteTest < Minitest::Test
     dates.each do |date|
       quote.effective_date = date
       quote.valid?
-      assert_equal(true, quote.errors[:effective_date].any?)
+      assert_equal(true, quote.error?(attr: :effective_date))
       assert_match(/is an invalid date/, quote.first_error_message(attr: :effective_date))
     end
   end
@@ -303,7 +303,7 @@ class QuoteTest < Minitest::Test
     dates.each do |date|
       quote.effective_date = Date.parse(date)
       quote.valid?
-      assert_equal(false, quote.errors[:effective_date].any?)
+      assert_equal(false, quote.error?(attr: :effective_date))
     end
   end
 
@@ -312,7 +312,7 @@ class QuoteTest < Minitest::Test
     ["", nil].each do |plan_code|
       quote.plan_code = plan_code
       quote.valid?
-      assert_equal(true, quote.errors[:plan_code].any?)
+      assert_equal(true, quote.error?(attr: :plan_code))
       assert_match(/can't be blank/, quote.first_error_message(attr: :plan_code))
     end
   end
@@ -323,7 +323,7 @@ class QuoteTest < Minitest::Test
     plan_codes.each do |plan_code|
       quote.plan_code = plan_code
       quote.valid?
-      assert_equal(true, quote.errors[:plan_code].any?)
+      assert_equal(true, quote.error?(attr: :plan_code))
       assert_match(/is not included in the list/, quote.first_error_message(attr: :plan_code))
     end
   end
@@ -334,18 +334,18 @@ class QuoteTest < Minitest::Test
     plan_codes.each do |plan_code|
       quote.plan_code = plan_code
       quote.valid?
-      assert_equal(false, quote.errors[:plan_code].any?)
+      assert_equal(false, quote.error?(attr: :plan_code))
     end
   end
 
   def test_coverage_terms_is_required
     quote = Quote.new
     quote.valid?
-    assert_equal(true, quote.errors[:coverage_terms].any?)
+    assert_equal(true, quote.error?(attr: :coverage_terms))
     assert_match(/can't be blank/, quote.first_error_message(attr: :coverage_terms))
     quote.coverage_terms = nil
     quote.valid?
-    assert_equal(true, quote.errors[:coverage_terms].any?)
+    assert_equal(true, quote.error?(attr: :coverage_terms))
     assert_match(/can't be blank/, quote.first_error_message(attr: :coverage_terms))
   end
 
@@ -355,7 +355,7 @@ class QuoteTest < Minitest::Test
     coverage_terms.each do |terms|
       quote.coverage_terms = terms
       quote.valid?
-      assert_equal(true, quote.errors[:coverage_terms].any?)
+      assert_equal(true, quote.error?(attr: :coverage_terms))
       assert_match(/is not a number/, quote.first_error_message(attr: :coverage_terms))
     end
   end
@@ -366,7 +366,7 @@ class QuoteTest < Minitest::Test
     coverage_terms.each do |terms|
       quote.coverage_terms = terms
       quote.valid?
-      assert_equal(false, quote.errors[:coverage_terms].any?)
+      assert_equal(false, quote.error?(attr: :coverage_terms))
     end
   end
 
@@ -376,7 +376,7 @@ class QuoteTest < Minitest::Test
     coverage_terms.each do |terms|
       quote.coverage_terms = terms
       quote.valid?
-      assert_equal(true, quote.errors[:coverage_terms].any?)
+      assert_equal(true, quote.error?(attr: :coverage_terms))
       assert_match(/must be an integer/, quote.first_error_message(attr: :coverage_terms))
     end
   end

@@ -130,6 +130,10 @@ class Quote
     false
   end  
 
+  def error?(attr:)
+    errors[attr].any?
+  end
+
   def first_full_message
     errors.full_messages[0]
   end
