@@ -1,7 +1,5 @@
-require 'minitest/autorun'
-require 'minitest/pride'
 require 'date'
-require 'minitest/ci'
+require_relative 'test_helper'
 require_relative '../lib/premium_calculator'
 
 class PremiumCalculatorTest < Minitest::Test
