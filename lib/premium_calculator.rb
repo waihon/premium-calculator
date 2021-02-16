@@ -177,7 +177,7 @@ class LifePremiumRate
   end
 
   def rate
-    raise "Called abstract method: rate" 
+    raise NotImplementedError, "Called abstract method: rate"
   end
 
   def divisor
