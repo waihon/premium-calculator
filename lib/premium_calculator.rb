@@ -58,7 +58,7 @@ class Age
   end
 
   def age
-    raise "Called abstract method: age"
+    raise NotImplementedError, "Called abstract method: age"
   end
 end
 
