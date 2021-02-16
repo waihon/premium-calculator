@@ -175,10 +175,13 @@ end
 
 class QuoteTest < Minitest::Test
   def test_gender_is_required
-    quote = Quote.new(gender: "")
-    assert_equal(false, quote.valid?)
-    assert_equal(true, quote.errors[:gender].any?)
-    assert_match(/can't be blank/, quote.errors[:gender].first)
+    quote = Quote.new
+    ["", nil].each do |gender|
+      quote.gender = gender
+      assert_equal(false, quote.valid?)
+      assert_equal(true, quote.errors[:gender].any?)
+      assert_match(/can't be blank/, quote.errors[:gender].first)
+    end
   end
 
   def test_gender_is_valid
@@ -221,10 +224,13 @@ class QuoteTest < Minitest::Test
   end
 
   def test_smoking_status_is_required
-    quote = Quote.new(smoking_status: "")
-    quote.valid?
-    assert_equal(true, quote.errors[:smoking_status].any?)
-    assert_match(/can't be blank/, quote.errors[:smoking_status].first) 
+    quote = Quote.new
+    ["", nil].each do |smoking_status|
+      quote.smoking_status = smoking_status
+      quote.valid?
+      assert_equal(true, quote.errors[:smoking_status].any?)
+      assert_match(/can't be blank/, quote.errors[:smoking_status].first)
+    end
   end
 
   def test_smoking_status_is_invalid
@@ -302,10 +308,13 @@ class QuoteTest < Minitest::Test
   end
 
   def test_plan_code_is_required
-    quote = Quote.new(plan_code: "")
-    quote.valid?
-    assert_equal(true, quote.errors[:plan_code].any?)
-    assert_match(/can't be blank/, quote.errors[:plan_code].first)
+    quote = Quote.new
+    ["", nil].each do |plan_code|
+      quote.plan_code = plan_code
+      quote.valid?
+      assert_equal(true, quote.errors[:plan_code].any?)
+      assert_match(/can't be blank/, quote.errors[:plan_code].first)
+    end
   end
 
   def test_plan_code_is_invalid
