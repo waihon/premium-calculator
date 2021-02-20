@@ -558,6 +558,8 @@ class ModalFactorTest < Minitest::Test
 end
 
 class LifePremiumRateTest < Minitest::Test
+  include RateRoleTest
+
   def setup
     @quote = Quote.new(
       gender: Gender::FEMALE,
@@ -568,6 +570,7 @@ class LifePremiumRateTest < Minitest::Test
       coverage_amount: 100_000,
       coverage_terms: 15
     )
+    @role_player = LifePremiumRate.new(quote: @quote)
   end
 
   def test_premium_rate_factory
