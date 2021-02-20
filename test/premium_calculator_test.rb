@@ -584,6 +584,8 @@ class LifePremiumRateTest < Minitest::Test
 end
 
 class TermBasedRateTest < Minitest::Test
+  include RateRoleTest
+
   def setup
     @quote = Quote.new(
       gender: Gender::FEMALE,
@@ -594,6 +596,7 @@ class TermBasedRateTest < Minitest::Test
       coverage_amount: 100_000,
       coverage_terms: 15
     )
+    @role_player = TermBasedRate.new(quote: @quote)
   end
 
   def test_rate_female_non_smoker
