@@ -512,6 +512,13 @@ class AgeLastBirthdayTest < Minitest::Test
 end
 
 class AgeNextBirthdayTest < Minitest::Test
+  include AgeRoleTest
+
+  def setup
+    @role_player = AgeNextBirthday.new(date_of_birth: Date.parse("2003-01-01"),
+                                       now: Date.parse("2021-01-01"))
+  end
+
   def test_age_on_birthday
     age = AgeNextBirthday.new(date_of_birth: Date.parse("2003-03-18"),
                               now: Date.parse("2021-03-18"))
