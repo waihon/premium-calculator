@@ -8,6 +8,12 @@ module RateRoleTest
   end
 end
 
+module AgeRoleTest
+  def test_plays_age_role
+    assert_respond_to @role_player, :age
+  end
+end
+
 class PremiumCalculatorTest < Minitest::Test
   def setup
     @original_stdout = $stdout.clone
