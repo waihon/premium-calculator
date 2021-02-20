@@ -398,6 +398,13 @@ class QuoteTest < Minitest::Test
 end
 
 class AgeTest < Minitest::Test
+  include AgeRoleTest
+
+  def setup
+    @role_player = Age.new(date_of_birth: Date.parse("2003-01-01"),
+                           now: Date.parse("2021-01-01"))
+  end
+
   def test_birthday_on_birthday
     age = Age.new(date_of_birth: Date.parse("2003-01-01"),
                             now: Date.parse("2021-01-01"))
