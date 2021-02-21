@@ -550,6 +550,9 @@ class AgeNextBirthdayTest < Minitest::Test
   end
 end
 
+class AgeNearestBirthdayTest < Minitest::Test
+end
+
 class PremiumRatesTest < Minitest::Test
   def test_premXum_rates_valid_plan
     rates = PremiumRates.new(plan_code: LifeInsurancePlan::T15).rates
