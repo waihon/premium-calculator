@@ -57,6 +57,12 @@ class Age
     (now.month == date_of_birth.month && now.day > date_of_birth.day)
   end
 
+  def actual_age
+    age = now.year - date_of_birth.year
+    age -= 1 unless (birthday? || birthday_passed?)
+    age
+  end
+
   def age
     raise NotImplementedError, "Called abstract method: age"
   end
