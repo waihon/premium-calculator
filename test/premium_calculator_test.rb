@@ -565,14 +565,14 @@ class AgeNearestBirthdayTest < Minitest::Test
   end
 
   def test_age_on_one_day_before_birthday
-    age = AgeNextBirthday.new(date_of_birth: Date.parse("2003-03-18"),
-                              now: Date.parse("2021-03-17"))
+    age = AgeNearestBirthday.new(date_of_birth: Date.parse("2003-03-18"),
+                                 now: Date.parse("2021-03-17"))
     assert_equal(18, age.age)
   end
 
   def test_age_on_one_day_after_birthday
-    age = AgeNextBirthday.new(date_of_birth: Date.parse("2003-03-18"),
-                              now: Date.parse("2021-03-19"))
+    age = AgeNearestBirthday.new(date_of_birth: Date.parse("2003-03-18"),
+                                 now: Date.parse("2021-03-19"))
     assert_equal(18, age.age)
   end
 end
