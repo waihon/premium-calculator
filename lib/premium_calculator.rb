@@ -70,6 +70,9 @@ class AgeLastBirthday < Age
   end
 end
 
+class AgeNearestBirthday < Age
+end
+
 class AgeNextBirthday < Age
   def age
     age = now.year - date_of_birth.year
