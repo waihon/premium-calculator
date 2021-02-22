@@ -70,14 +70,19 @@ class AgeLastBirthday < Age
   end
 end
 
-class AgeNearestBirthday < Age
-end
-
 class AgeNextBirthday < Age
   def age
     age = now.year - date_of_birth.year
     age -= 1 unless (birthday? || birthday_passed?)
     age + 1
+  end
+end
+
+class AgeNearestBirthday < Age
+  def age
+    age = now.year - date_of_birth.year
+    age -= 1 unless (birthday? || birthday_passed?)
+    age
   end
 end
 
