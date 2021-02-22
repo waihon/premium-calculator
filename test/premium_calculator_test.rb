@@ -557,6 +557,12 @@ class AgeNearestBirthdayTest < Minitest::Test
     @role_player = AgeNearestBirthday.new(date_of_birth: Date.parse("2003-01-01"),
                                           now: Date.parse("2021-01-01"))
   end
+
+  def test_age_on_birthday
+    age = AgeNearestBirthday.new(date_of_birth: Date.parse("2003-03-18"),
+                                 now: Date.parse("2021-03-18"))
+    assert_equal(18, age.age)
+  end
 end
 
 class PremiumRatesTest < Minitest::Test
