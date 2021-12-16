@@ -13,6 +13,7 @@ require_relative 'quote'
 require_relative 'life_premium_rate'
 require_relative 'term_based_rate'
 require_relative 'age_based_rate'
+require_relative 'premium_rate_not_found_error'
 
 class PremiumCalculator
   attr_reader :quote, :age, :premium_rate
@@ -31,16 +32,6 @@ class PremiumCalculator
     rescue PremiumRateNotFoundError => e
       puts "#{e.message} for #{e.key}"
     end
-  end
-end
-
-class PremiumRateNotFoundError < StandardError
-  attr_reader :key
-
-  def initialize(message, key)
-    super(message)
-
-    @key = key
   end
 end
 
