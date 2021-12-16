@@ -14,6 +14,7 @@ require_relative 'life_premium_rate'
 require_relative 'term_based_rate'
 require_relative 'age_based_rate'
 require_relative 'premium_rate_not_found_error'
+require_relative 'premium_rates'
 
 class PremiumCalculator
   attr_reader :quote, :age, :premium_rate
@@ -32,24 +33,6 @@ class PremiumCalculator
     rescue PremiumRateNotFoundError => e
       puts "#{e.message} for #{e.key}"
     end
-  end
-end
-
-class PremiumRates
-  attr_reader :plan_code
-
-  def initialize(plan_code:)
-    @plan_code = plan_code
-    filename = "config/#{@plan_code}/premium_rates.yaml"
-    @premium_rates = File.exist?(filename) ? YAML.load(File.read(filename)) : nil
-  end
-
-  def rates
-    @premium_rates && @premium_rates["rates"]
-  end
-
-  def divisor
-    @premium_rates && @premium_rates['divisor']
   end
 end
 
