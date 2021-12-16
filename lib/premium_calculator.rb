@@ -8,6 +8,7 @@ require_relative 'age_last_birthday'
 require_relative 'age_next_birthday'
 require_relative 'age_nearest_birthday'
 require_relative 'date_validator'
+require_relative 'numeric_validator'
 
 class PremiumCalculator
   attr_reader :quote, :age, :premium_rate
@@ -25,14 +26,6 @@ class PremiumCalculator
       quote.coverage_amount * premium_rate.rate / premium_rate.divisor 
     rescue PremiumRateNotFoundError => e
       puts "#{e.message} for #{e.key}"
-    end
-  end
-end
-
-class NumericValidator < ActiveModel::EachValidator
-  def validate_each(record, attribute, value)
-    unless value.is_a? Numeric
-      record.errors.add(attribute, options[:message] || "is not a number")
     end
   end
 end
