@@ -4,6 +4,7 @@ require_relative 'life_insurance_plan'
 require_relative 'gender'
 require_relative 'smoking'
 require_relative 'age'
+require_relative 'age_last_birthday'
 
 class PremiumCalculator
   attr_reader :quote, :age, :premium_rate
@@ -22,12 +23,6 @@ class PremiumCalculator
     rescue PremiumRateNotFoundError => e
       puts "#{e.message} for #{e.key}"
     end
-  end
-end
-
-class AgeLastBirthday < Age
-  def age
-    actual_age
   end
 end
 
