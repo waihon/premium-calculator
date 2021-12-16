@@ -16,3 +16,8 @@ Per Dollar Premium Rate is retrievable from a premium rate table based on the fo
    * Derived from Date of Birth
 3. Mortality Class
    * Derived from Smoking Status
+
+## Commands
+
+1. Run tests
+   * `bundle exec rake test`
