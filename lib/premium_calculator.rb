@@ -2,11 +2,7 @@ require 'yaml'
 require 'active_model'
 require_relative 'life_insurance_plan'
 require_relative 'gender'
-
-class Smoking
-  NON_SMOKER = "N".freeze
-  SMOKER = "S".freeze
-end
+require_relative 'smoking'
 
 class PremiumCalculator
   attr_reader :quote, :age, :premium_rate
