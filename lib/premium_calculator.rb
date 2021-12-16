@@ -1,11 +1,7 @@
 require 'yaml'
 require 'active_model'
 require_relative 'life_insurance_plan'
-
-class Gender
-  MALE = "M".freeze
-  FEMALE = "F".freeze
-end
+require_relative 'gender'
 
 class Smoking
   NON_SMOKER = "N".freeze
