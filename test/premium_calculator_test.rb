@@ -1,7 +1,9 @@
-require 'date'
 require_relative 'test_helper'
+require_relative '../lib/quote'
+require_relative '../lib/gender'
+require_relative '../lib/smoking'
+require_relative '../lib/life_insurance_plan'
 require_relative '../lib/premium_calculator'
-require_relative 'rate_role_test'
 
 class PremiumCalculatorTest < Minitest::Test
   def setup
