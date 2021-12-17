@@ -1,3 +1,5 @@
+require 'yaml'
+
 class PremiumRates
   attr_reader :plan_code
 

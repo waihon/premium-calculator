@@ -1,3 +1,10 @@
+require 'active_model'
+require_relative 'gender'
+require_relative 'date_validator'
+require_relative 'smoking'
+require_relative 'life_insurance_plan'
+require_relative 'numeric_validator'
+
 class Quote
   include ActiveModel::Validations
   include ActiveModel::Conversion

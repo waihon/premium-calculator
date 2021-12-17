@@ -1,3 +1,5 @@
+require 'yaml'
+
 class ModalFactor
   YEARLY = "Y".freeze
   HALF_YEARLY = "HY".freeze

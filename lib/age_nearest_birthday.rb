@@ -1,3 +1,5 @@
+require_relative 'age'
+
 class AgeNearestBirthday < Age
   def age
     return actual_age if birthday?

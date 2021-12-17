@@ -1,3 +1,6 @@
+require_relative 'age_last_birthday'
+require_relative 'premium_rates'
+
 class LifePremiumRate
   def self.for(quote:, age_calculator: AgeLastBirthday, premium_rates: PremiumRates)
     registry.find do |candidate|
