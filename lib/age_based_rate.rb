@@ -1,3 +1,5 @@
+require_relative 'life_premium_rate'
+
 class AgeBasedRate < LifePremiumRate
   def self.handles?(plan_code:)
     [LifeInsurancePlan::WLF].include?(plan_code)
