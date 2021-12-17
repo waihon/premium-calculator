@@ -1,3 +1,6 @@
+require_relative 'life_premium_rate'
+require_relative 'premium_rate_not_found_error'
+
 class TermBasedRate < LifePremiumRate
   def self.handles?(plan_code:)
     [LifeInsurancePlan::T15].include?(plan_code)
